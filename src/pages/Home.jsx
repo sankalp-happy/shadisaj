@@ -138,14 +138,14 @@ export default function Home() {
             <p className="text-text-primary/70 text-lg">Everything you need to run a successful wedding business</p>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 max-w-6xl mx-auto">
-            {categories.map(({ slug, label, bg, icon: Icon }) => (
+            {categories.map(({ slug, label, bg, icon: IconComponent }) => (
               <Link
                 key={slug}
                 to={`/vendor/products?category=${slug}`}
                 className={`${bg} rounded-2xl p-6 text-center transition-all duration-300 cursor-pointer group border-2 hover:shadow-lg hover:-translate-y-1`}
               >
                 <div className="w-14 h-14 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-sm group-hover:shadow-md transition-all duration-300">
-                  <Icon className="w-7 h-7 text-text-primary" />
+                  <IconComponent className="w-7 h-7 text-text-primary" />
                 </div>
                 <h3 className="font-semibold text-text-primary">{label}</h3>
               </Link>
