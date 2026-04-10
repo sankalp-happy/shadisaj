@@ -17,6 +17,7 @@ export default function Services() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [sortOrder, setSortOrder] = useState('recommended');
   const { isInWishlist, toggleWishlist } = useWishlist();
 
   // Get filter values from URL
@@ -52,9 +53,18 @@ export default function Services() {
         s.services.some(svc => svc.toLowerCase().includes(query))
       );
     }
+    
+    // Apply sorting
+    if (sortOrder === 'price-asc') {
+      result.sort((a, b) => a.priceRange.min - b.priceRange.min);
+    } else if (sortOrder === 'price-desc') {
+      result.sort((a, b) => b.priceRange.min - a.priceRange.min);
+    } else if (sortOrder === 'rating') {
+      result.sort((a, b) => b.rating - a.rating);
+    }
 
     return result;
-  }, [activeCategory, activeLocation, minBudget, maxBudget, searchQuery]);
+  }, [activeCategory, activeLocation, minBudget, maxBudget, searchQuery, sortOrder]);
 
   // Update filters
   const setCategory = (slug) => {
@@ -126,6 +136,24 @@ export default function Services() {
                 />
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-text-primary/50" />
               </div>
+              
+              {/* Sort Dropdown */}
+              <div className="relative hidden md:block">
+                <select 
+                  value={sortOrder} 
+                  onChange={(e) => setSortOrder(e.target.value)}
+                  className="pl-4 pr-10 py-2 border-2 border-utility-border/30 rounded-xl bg-background-main text-text-primary focus:outline-none focus:border-brand-interactive transition-colors appearance-none font-medium"
+                >
+                  <option value="recommended">Recommended</option>
+                  <option value="price-asc">Price: Low to High</option>
+                  <option value="price-desc">Price: High to Low</option>
+                  <option value="rating">Top Rated</option>
+                </select>
+                <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-text-primary/50">
+                  <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                </div>
+              </div>
+
               {/* Mobile filter toggle */}
               <button
                 className="md:hidden flex items-center gap-2 bg-brand-interactive text-white px-4 py-2 rounded-xl font-semibold text-sm"
@@ -229,6 +257,21 @@ export default function Services() {
                     );
                   })}
                 </div>
+              </div>
+
+              {/* Mobile Sort */}
+              <div className="md:hidden">
+                <h3 className="text-xs font-bold text-text-primary/50 uppercase tracking-wider mb-3">Sort By</h3>
+                <select 
+                  value={sortOrder} 
+                  onChange={(e) => setSortOrder(e.target.value)}
+                  className="w-full px-3 py-2.5 rounded-xl text-sm font-medium border-2 border-utility-border/30 bg-background-main text-text-primary focus:outline-none focus:border-brand-interactive transition-colors"
+                >
+                  <option value="recommended">Recommended</option>
+                  <option value="price-asc">Price: Low to High</option>
+                  <option value="price-desc">Price: High to Low</option>
+                  <option value="rating">Top Rated</option>
+                </select>
               </div>
             </div>
           </aside>

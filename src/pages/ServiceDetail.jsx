@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { 
   Star, MapPin, Heart, Phone, Mail, Calendar, Clock, 
@@ -25,6 +26,49 @@ function formatDate(dateStr) {
     year: 'numeric' 
   });
 }
+
+const CalendarView = ({ availableDates }) => {
+  const [currentDate, setCurrentDate] = useState(new Date(availableDates.length > 0 ? availableDates[0] : Date.now()));
+  
+  const getDaysInMonth = (year, month) => new Date(year, month + 1, 0).getDate();
+  const firstDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1).getDay();
+  const daysInMonth = getDaysInMonth(currentDate.getFullYear(), currentDate.getMonth());
+  
+  const days = [];
+  for (let i = 0; i < firstDayOfMonth; i++) days.push(null);
+  for (let i = 1; i <= daysInMonth; i++) days.push(i);
+
+  const nextMonth = () => setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1));
+  const prevMonth = () => setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1));
+
+  const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+  return (
+    <div className="w-full">
+      <div className="flex justify-between items-center mb-6">
+        <button onClick={prevMonth} className="px-3 py-1 bg-background-main border border-utility-border/30 hover:bg-brand-interactive/10 rounded-lg text-text-primary font-bold transition-colors">&larr;</button>
+        <span className="font-bold text-lg text-text-primary">{monthNames[currentDate.getMonth()]} {currentDate.getFullYear()}</span>
+        <button onClick={nextMonth} className="px-3 py-1 bg-background-main border border-utility-border/30 hover:bg-brand-interactive/10 rounded-lg text-text-primary font-bold transition-colors">&rarr;</button>
+      </div>
+      <div className="grid grid-cols-7 gap-2 text-center text-sm mb-4">
+        {['Su','Mo','Tu','We','Th','Fr','Sa'].map(d => <div key={d} className="font-semibold text-text-primary/60 pb-2">{d}</div>)}
+        {days.map((day, idx) => {
+          if (day === null) return <div key={`empty-${idx}`} />;
+          const dateStr = `${currentDate.getFullYear()}-${String(currentDate.getMonth() + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+          const isAvailable = availableDates.includes(dateStr);
+          return (
+            <div key={idx} className={`py-3 rounded-xl transition-all duration-300 font-medium ${isAvailable ? 'bg-green-100 text-green-700 border-2 border-green-200 cursor-pointer hover:bg-green-200' : 'text-text-primary/30'}`}>
+              {day}
+            </div>
+          );
+        })}
+      </div>
+      <div className="flex gap-2 items-center text-sm text-text-primary/60">
+        <span className="w-3 h-3 bg-green-100 border border-green-200 rounded-full inline-block"></span> Available Dates
+      </div>
+    </div>
+  );
+};
 
 export default function ServiceDetail() {
   const { slug } = useParams();
@@ -189,21 +233,12 @@ export default function ServiceDetail() {
 
             {/* Availability */}
             <div className="bg-background-card rounded-2xl border-2 border-utility-border/30 p-6">
-              <h2 className="text-xl font-bold text-text-primary mb-4 flex items-center gap-2">
+              <h2 className="text-xl font-bold text-text-primary mb-6 flex items-center gap-2">
                 <Calendar className="w-6 h-6 text-brand-interactive" />
-                Available Dates
+                Availability Calendar
               </h2>
-              <div className="flex flex-wrap gap-3">
-                {service.availability.map((date, idx) => (
-                  <div 
-                    key={idx}
-                    className="bg-green-50 border border-green-200 rounded-xl px-4 py-2 text-sm font-medium text-green-700"
-                  >
-                    {formatDate(date)}
-                  </div>
-                ))}
-              </div>
-              <p className="text-sm text-text-primary/60 mt-4">
+              <CalendarView availableDates={service.availability} />
+              <p className="text-sm text-text-primary/60 mt-6 pt-4 border-t border-utility-border/20">
                 * More dates may be available. Contact the vendor for specific date inquiries.
               </p>
             </div>
@@ -266,6 +301,15 @@ export default function ServiceDetail() {
               <div className="bg-background-card rounded-2xl border-2 border-utility-border/30 p-6">
                 <h3 className="font-bold text-text-primary mb-4">Contact Vendor</h3>
                 <div className="space-y-3">
+                  <button
+                    onClick={() => {
+                      alert("Your request has been sent! The vendor will contact you within 1 hour.");
+                    }}
+                    className="w-full flex items-center justify-center gap-2 bg-brand-interactive hover:bg-alternative-interactiveDark text-white px-4 py-3 rounded-xl font-semibold transition-colors shadow-md"
+                  >
+                    <Clock className="w-5 h-5" />
+                    Request Callback in 1 Hour
+                  </button>
                   <a
                     href={`tel:${service.contact.phone}`}
                     className="flex items-center gap-3 bg-green-50 hover:bg-green-100 rounded-xl px-4 py-3 transition-colors"

@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { IndianRupee, RotateCcw, TrendingUp } from 'lucide-react';
 import { budgetCategories } from '../data/budgetCategories';
+import { services } from '../data/services';
+import { Link } from 'react-router-dom';
 
 const PRESETS = [
   { label: '₹5 Lakh', value: 500000 },
@@ -193,6 +195,80 @@ export default function Budget() {
                 </div>
               </div>
             </div>
+
+            {/* Vendor Suggestions */}
+            {submitted && (
+              <div className="mt-12">
+                <h3 className="text-2xl font-bold text-text-primary mb-6">Suggested Vendors For Your Budget</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {/* Suggestions for Venue */}
+                  {(() => {
+                    const venueBudget = Math.round((percentages['venue-catering'] / 100) * total);
+                    // 70% of venue-catering budget goes to Venue
+                    const venueTarget = venueBudget * 0.7;
+                    // 30% of venue-catering budget goes to Catering (assume 300 guests)
+                    const catererTargetPerPlate = (venueBudget * 0.3) / 300;
+
+                    const suggestedVenues = services
+                      .filter(s => s.category === 'venues' && s.priceRange.min <= venueTarget)
+                      .sort((a, b) => b.rating - a.rating)
+                      .slice(0, 3);
+                      
+                    const suggestedCaterers = services
+                      .filter(s => s.category === 'caterers' && s.priceRange.min <= catererTargetPerPlate)
+                      .sort((a, b) => b.rating - a.rating)
+                      .slice(0, 3);
+
+                    return (
+                      <>
+                        <div className="bg-background-card rounded-2xl border-2 border-utility-border/30 p-6 shadow-sm hover:shadow-md transition-shadow">
+                          <h4 className="font-bold text-lg mb-4 text-text-primary flex items-center gap-2">
+                            <span>🏛️</span> Matching Venues
+                          </h4>
+                          {suggestedVenues.length > 0 ? suggestedVenues.map(venue => (
+                            <div key={venue.id} className="flex gap-4 mb-4 pb-4 border-b border-utility-border/10 last:border-0 last:pb-0 last:mb-0">
+                              <img src={venue.image} className="w-20 h-20 rounded-xl object-cover flex-shrink-0" alt={venue.name} />
+                              <div className="flex-1">
+                                <h5 className="font-bold text-text-primary text-sm line-clamp-1">{venue.name}</h5>
+                                <p className="text-xs text-text-primary/60 mt-0.5">{venue.location} • ₹{formatINR(venue.priceRange.min)} {venue.priceRange.unit}</p>
+                                <Link to={`/services/${venue.slug}`} className="text-xs font-semibold text-brand-interactive hover:text-alternative-interactiveDark mt-2 inline-block">
+                                  View Details &rarr;
+                                </Link>
+                              </div>
+                            </div>
+                          )) : (
+                            <p className="text-sm text-text-primary/60 bg-background-main p-4 rounded-xl">
+                              No venues found within this budget. Try adjusting the slider or total budget.
+                            </p>
+                          )}
+                        </div>
+                        <div className="bg-background-card rounded-2xl border-2 border-utility-border/30 p-6 shadow-sm hover:shadow-md transition-shadow">
+                          <h4 className="font-bold text-lg mb-4 text-text-primary flex items-center gap-2">
+                            <span>🍲</span> Matching Caterers
+                          </h4>
+                          {suggestedCaterers.length > 0 ? suggestedCaterers.map(caterer => (
+                            <div key={caterer.id} className="flex gap-4 mb-4 pb-4 border-b border-utility-border/10 last:border-0 last:pb-0 last:mb-0">
+                              <img src={caterer.image} className="w-20 h-20 rounded-xl object-cover flex-shrink-0" alt={caterer.name} />
+                              <div className="flex-1">
+                                <h5 className="font-bold text-text-primary text-sm line-clamp-1">{caterer.name}</h5>
+                                <p className="text-xs text-text-primary/60 mt-0.5">{caterer.location} • ₹{caterer.priceRange.min} {caterer.priceRange.unit}</p>
+                                <Link to={`/services/${caterer.slug}`} className="text-xs font-semibold text-brand-interactive hover:text-alternative-interactiveDark mt-2 inline-block">
+                                  View Details &rarr;
+                                </Link>
+                              </div>
+                            </div>
+                          )) : (
+                            <p className="text-sm text-text-primary/60 bg-background-main p-4 rounded-xl">
+                              No caterers found within this budget. Try adjusting the slider or total budget.
+                            </p>
+                          )}
+                        </div>
+                      </>
+                    )
+                  })()}
+                </div>
+              </div>
+            )}
 
           </div>
         </section>

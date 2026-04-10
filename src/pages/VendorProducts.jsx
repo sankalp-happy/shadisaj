@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { Package, ShoppingBag, SlidersHorizontal, X } from 'lucide-react';
+import { products } from '../data/products';
 
 const sidebarCategories = [
   { slug: 'all', label: 'All Products' },
@@ -90,33 +91,83 @@ export default function VendorProducts() {
               <h2 className="text-xl font-bold text-text-primary">{activeName}</h2>
             </div>
 
-            {/* Empty state matching original site */}
-            <div className="bg-background-card rounded-2xl border-2 border-utility-border/30 p-12 md:p-20 text-center">
-              <div className="w-20 h-20 bg-brand-interactive/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                <ShoppingBag className="w-10 h-10 text-brand-interactive" />
-              </div>
-              <h3 className="text-2xl font-bold text-text-primary mb-3">Products Coming Soon</h3>
-              <p className="text-text-primary/70 mb-8 max-w-md mx-auto leading-relaxed">
-                We're onboarding verified suppliers in the <strong>{activeName}</strong> category.
-                Check back soon or{' '}
-                <a href="tel:+918877777361" className="text-brand-interactive hover:underline font-medium">call us</a>{' '}
-                to discuss your equipment needs directly.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                <a
-                  href="tel:+918877777361"
-                  className="inline-flex items-center justify-center gap-2 bg-brand-interactive text-white px-6 py-3 rounded-2xl font-semibold hover:bg-alternative-interactiveDark transition-all duration-300 shadow-md"
-                >
-                  <Package className="w-5 h-5" />Talk to a Supplier
-                </a>
-                <Link
-                  to="/contact"
-                  className="inline-flex items-center justify-center gap-2 bg-background-main text-text-primary px-6 py-3 rounded-2xl font-semibold border-2 border-utility-border/30 hover:border-brand-interactive hover:text-brand-interactive transition-all duration-300"
-                >
-                  Submit Requirement
-                </Link>
-              </div>
-            </div>
+            {/* Products grid or Empty state */}
+            {(() => {
+              const filteredProducts = activeCategory === 'all' 
+                ? products 
+                : products.filter(p => p.category === activeCategory);
+
+              if (filteredProducts.length > 0) {
+                return (
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {filteredProducts.map(product => (
+                      <div key={product.id} className="bg-background-card rounded-2xl border-2 border-utility-border/30 overflow-hidden hover:border-brand-interactive hover:shadow-xl transition-all duration-300 group">
+                        <div className="relative h-48 overflow-hidden">
+                          <img 
+                            src={product.image} 
+                            alt={product.name}
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                          />
+                        </div>
+                        <div className="p-5">
+                          <h3 className="text-lg font-bold text-text-primary group-hover:text-brand-interactive transition-colors mb-2 line-clamp-1">
+                            {product.name}
+                          </h3>
+                          <p className="text-sm text-text-primary/70 mb-4 line-clamp-2">
+                            {product.description}
+                          </p>
+                          <div className="flex items-center justify-between pt-4 border-t border-utility-border/20">
+                            <div className="flex flex-col">
+                              <span className="text-xs text-text-primary/50">Price</span>
+                              <div className="text-lg font-bold text-brand-interactive">
+                                ₹{product.price.toLocaleString()}
+                              </div>
+                            </div>
+                            <button
+                              onClick={() => alert(`Added ${product.name} to cart!`)}
+                              className="bg-brand-interactive hover:bg-alternative-interactiveDark text-white p-2 rounded-xl transition-all duration-300 flex items-center gap-2 px-4"
+                            >
+                              <ShoppingBag className="w-4 h-4" />
+                              <span className="text-sm font-semibold">Buy</span>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                );
+              }
+              
+              // Empty state matching original site
+              return (
+                <div className="bg-background-card rounded-2xl border-2 border-utility-border/30 p-12 md:p-20 text-center">
+                  <div className="w-20 h-20 bg-brand-interactive/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <ShoppingBag className="w-10 h-10 text-brand-interactive" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-text-primary mb-3">Products Coming Soon</h3>
+                  <p className="text-text-primary/70 mb-8 max-w-md mx-auto leading-relaxed">
+                    We're onboarding verified suppliers in the <strong>{activeName}</strong> category.
+                    Check back soon or{' '}
+                    <a href="tel:+918877777361" className="text-brand-interactive hover:underline font-medium">call us</a>{' '}
+                    to discuss your equipment needs directly.
+                  </p>
+                  <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                    <a
+                      href="tel:+918877777361"
+                      className="inline-flex items-center justify-center gap-2 bg-brand-interactive text-white px-6 py-3 rounded-2xl font-semibold hover:bg-alternative-interactiveDark transition-all duration-300 shadow-md"
+                    >
+                      <Package className="w-5 h-5" />Talk to a Supplier
+                    </a>
+                    <Link
+                      to="/contact"
+                      className="inline-flex items-center justify-center gap-2 bg-background-main text-text-primary px-6 py-3 rounded-2xl font-semibold border-2 border-utility-border/30 hover:border-brand-interactive hover:text-brand-interactive transition-all duration-300"
+                    >
+                      Submit Requirement
+                    </Link>
+                  </div>
+                </div>
+              );
+            })()}
           </main>
         </div>
       </div>
