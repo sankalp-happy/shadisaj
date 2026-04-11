@@ -1,5 +1,5 @@
 // Service providers data for wedding marketplace
-export const services = [
+const baseServices = [
   // CATERERS
   {
     id: 'royal-caterers-delhi',
@@ -551,6 +551,228 @@ export const services = [
   }
 ];
 
+const targetCountByCategory = {
+  caterers: 10,
+  decorators: 10,
+  dj: 10,
+  venues: 10,
+  photography: 10,
+  mehndi: 10,
+  makeup: 10,
+  pandit: 10,
+  invitations: 10
+};
+
+const generatedCategoryConfig = {
+  caterers: {
+    brand: 'Celebration Caterers',
+    description: 'Wedding catering team with regional menus, live counters, and trained banquet staff.',
+    shortDescription: 'Regional menus with live counters and banquet staff',
+    image: 'https://images.unsplash.com/photo-1555244162-803834f70033?w=400&h=300&fit=crop',
+    priceRange: { min: 650, max: 1700, unit: 'per plate' },
+    priceStepMin: 35,
+    priceStepMax: 50,
+    services: ['Regional Menus', 'Live Counters', 'Dessert Bar', 'Mocktail Station', 'Service Team'],
+    establishedBase: 2007,
+    eventsBase: 220,
+    ratingBase: 4.4,
+    reviewsBase: 70,
+    phoneBase: 9000001000,
+    emailPrefix: 'caterers-'
+  },
+  decorators: {
+    brand: 'Signature Wedding Decor',
+    description: 'Full-service decor company focused on floral styling, stage concepts, and wedding ambiance design.',
+    shortDescription: 'Floral styling, stage concepts, and theme decor',
+    image: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=400&h=300&fit=crop',
+    priceRange: { min: 120000, max: 700000, unit: 'per event' },
+    priceStepMin: 12000,
+    priceStepMax: 30000,
+    services: ['Mandap Decor', 'Stage Setup', 'Floral Styling', 'Entry Arch', 'Lighting Design'],
+    establishedBase: 2008,
+    eventsBase: 180,
+    ratingBase: 4.5,
+    reviewsBase: 65,
+    phoneBase: 9000002000,
+    emailPrefix: 'decor-'
+  },
+  dj: {
+    brand: 'Pulse DJ Collective',
+    description: 'Wedding entertainment crew with DJs, lighting engineers, and dance-floor production support.',
+    shortDescription: 'Wedding DJs with sound, lights, and production support',
+    image: 'https://images.unsplash.com/photo-1571266028243-e4733b0f0bb0?w=400&h=300&fit=crop',
+    priceRange: { min: 45000, max: 190000, unit: 'per event' },
+    priceStepMin: 6000,
+    priceStepMax: 12000,
+    services: ['DJ Set', 'Sound Setup', 'Lighting Rig', 'Dance Floor Effects', 'MC Support'],
+    establishedBase: 2010,
+    eventsBase: 240,
+    ratingBase: 4.4,
+    reviewsBase: 90,
+    phoneBase: 9000003000,
+    emailPrefix: 'dj-'
+  },
+  venues: {
+    brand: 'Celebration Venue Collection',
+    description: 'Premium wedding venue network offering indoor and outdoor celebration spaces for all scales.',
+    shortDescription: 'Premium venue spaces for intimate and grand weddings',
+    image: 'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=400&h=300&fit=crop',
+    priceRange: { min: 600000, max: 2600000, unit: 'per day' },
+    priceStepMin: 50000,
+    priceStepMax: 120000,
+    services: ['Banquet Halls', 'Open Lawns', 'Bridal Rooms', 'Parking', 'Coordination Desk'],
+    establishedBase: 2005,
+    eventsBase: 420,
+    ratingBase: 4.5,
+    reviewsBase: 110,
+    phoneBase: 9000004000,
+    emailPrefix: 'venues-'
+  },
+  photography: {
+    brand: 'Moments Capture Studio',
+    description: 'Wedding photography and film team covering candid moments, portraits, and full-event storytelling.',
+    shortDescription: 'Candid photography and cinematic wedding films',
+    image: 'https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=400&h=300&fit=crop',
+    priceRange: { min: 90000, max: 380000, unit: 'per event' },
+    priceStepMin: 8000,
+    priceStepMax: 18000,
+    services: ['Candid Photography', 'Cinematic Film', 'Drone Shots', 'Pre-wedding Shoot', 'Album Design'],
+    establishedBase: 2011,
+    eventsBase: 210,
+    ratingBase: 4.5,
+    reviewsBase: 85,
+    phoneBase: 9000005000,
+    emailPrefix: 'photo-'
+  },
+  mehndi: {
+    brand: 'Royal Mehndi Artists',
+    description: 'Bridal mehndi specialists creating intricate traditional and contemporary henna patterns.',
+    shortDescription: 'Intricate bridal mehndi with guest artist teams',
+    image: 'https://images.unsplash.com/photo-1595907934615-a4d03f3e4c77?w=400&h=300&fit=crop',
+    priceRange: { min: 9000, max: 42000, unit: 'per bride' },
+    priceStepMin: 1000,
+    priceStepMax: 2200,
+    services: ['Bridal Mehndi', 'Guest Mehndi', 'Arabic Pattern', 'Rajasthani Pattern', 'Aftercare Kit'],
+    establishedBase: 2006,
+    eventsBase: 300,
+    ratingBase: 4.5,
+    reviewsBase: 72,
+    phoneBase: 9000006000,
+    emailPrefix: 'mehndi-'
+  },
+  makeup: {
+    brand: 'Bridal Glow Studio',
+    description: 'Professional bridal beauty team for makeup, hairstyling, draping, and touch-up support.',
+    shortDescription: 'Bridal makeup, hairstyling, and draping services',
+    image: 'https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=400&h=300&fit=crop',
+    priceRange: { min: 14000, max: 70000, unit: 'per look' },
+    priceStepMin: 1500,
+    priceStepMax: 3500,
+    services: ['Bridal Makeup', 'Hair Styling', 'Draping', 'Trial Session', 'Party Makeup'],
+    establishedBase: 2012,
+    eventsBase: 170,
+    ratingBase: 4.4,
+    reviewsBase: 60,
+    phoneBase: 9000007000,
+    emailPrefix: 'makeup-'
+  },
+  pandit: {
+    brand: 'Shubh Vedic Pandit Seva',
+    description: 'Experienced priests for complete wedding rituals with regional language and custom samagri support.',
+    shortDescription: 'Complete wedding rituals with custom samagri support',
+    image: 'https://images.unsplash.com/photo-1583089892943-e02e5b017b6a?w=400&h=300&fit=crop',
+    priceRange: { min: 18000, max: 65000, unit: 'per ceremony' },
+    priceStepMin: 1800,
+    priceStepMax: 3200,
+    services: ['Wedding Ceremony', 'Engagement Puja', 'Ganesh Sthapana', 'Havan', 'Samagri Arrangement'],
+    establishedBase: 2001,
+    eventsBase: 450,
+    ratingBase: 4.5,
+    reviewsBase: 55,
+    phoneBase: 9000008000,
+    emailPrefix: 'pandit-'
+  },
+  invitations: {
+    brand: 'Elegant Invite Works',
+    description: 'Invitation design house crafting premium wedding cards, boxed invites, and digital stationery.',
+    shortDescription: 'Premium card design, boxed invites, and digital stationery',
+    image: 'https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=400&h=300&fit=crop',
+    priceRange: { min: 45, max: 420, unit: 'per card' },
+    priceStepMin: 6,
+    priceStepMax: 10,
+    services: ['Custom Cards', 'Box Invites', 'Digital Invite', 'Save the Date', 'Thank You Notes'],
+    establishedBase: 2010,
+    eventsBase: 260,
+    ratingBase: 4.4,
+    reviewsBase: 50,
+    phoneBase: 9000009000,
+    emailPrefix: 'invites-'
+  }
+};
+
+const locationCycle = ['Delhi', 'Mumbai', 'Bangalore', 'Jaipur', 'Udaipur', 'Goa', 'Chennai', 'Jaisalmer', 'Lucknow', 'Muradabad'];
+
+const availabilitySlots = ['2026-06-02', '2026-06-09', '2026-06-16', '2026-06-23', '2026-06-30', '2026-07-07', '2026-07-14', '2026-07-21'];
+
+function toSlug(value) {
+  return value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+}
+
+function buildAvailability(offset) {
+  return [0, 2, 4, 6].map(step => availabilitySlots[(offset + step) % availabilitySlots.length]);
+}
+
+function formatPhone(phoneNumber) {
+  const normalized = String(phoneNumber).slice(-10);
+  return `+91 ${normalized.slice(0, 5)} ${normalized.slice(5)}`;
+}
+
+const generatedServices = Object.entries(targetCountByCategory).flatMap(([category, targetCount]) => {
+  const existingCount = baseServices.filter(service => service.category === category).length;
+  const missingCount = Math.max(targetCount - existingCount, 0);
+
+  if (!missingCount) {
+    return [];
+  }
+
+  const config = generatedCategoryConfig[category];
+
+  return Array.from({ length: missingCount }, (_, index) => {
+    const sequence = existingCount + index + 1;
+    const location = locationCycle[(existingCount + index) % locationCycle.length];
+    const slug = `${category}-${toSlug(location)}-${sequence}`;
+
+    return {
+      id: slug,
+      slug,
+      name: `${config.brand} ${location} ${sequence}`,
+      category,
+      description: `${config.description} Popular for dependable execution in ${location} and nearby wedding destinations.`,
+      shortDescription: config.shortDescription,
+      image: config.image,
+      location,
+      rating: Number((config.ratingBase + (index % 5) * 0.1).toFixed(1)),
+      reviews: config.reviewsBase + sequence * 12,
+      priceRange: {
+        min: config.priceRange.min + index * config.priceStepMin,
+        max: config.priceRange.max + index * config.priceStepMax,
+        unit: config.priceRange.unit
+      },
+      availability: buildAvailability(existingCount + index),
+      services: config.services,
+      featured: sequence % 5 === 0,
+      established: config.establishedBase + (index % 7),
+      eventsCompleted: config.eventsBase + sequence * 30,
+      contact: {
+        phone: formatPhone(config.phoneBase + sequence),
+        email: `${config.emailPrefix}${toSlug(location)}-${sequence}@shadisaj.in`
+      }
+    };
+  });
+});
+
+export const services = [...baseServices, ...generatedServices];
+
 // Helper functions
 export function getServiceBySlug(slug) {
   return services.find(s => s.slug === slug);
@@ -598,4 +820,4 @@ export function filterServices({ category, minBudget, maxBudget, location, avail
   });
 }
 
-export const locations = ['Delhi', 'Mumbai', 'Bangalore', 'Jaipur', 'Udaipur', 'Goa'];
+export const locations = Array.from(new Set(services.map(service => service.location)));
