@@ -1,5 +1,60 @@
 // Service providers data for wedding marketplace
 const baseServices = [
+
+  // BUDGET & MORADABAD VENDORS
+  {
+    id: 'budget-venue-moradabad',
+    slug: 'budget-venue-moradabad',
+    name: 'Moradabad Grand Banquet',
+    category: 'venues',
+    description: 'Affordable yet elegant banquet hall in Moradabad. Perfect for medium-sized gatherings with all basic amenities provided.',
+    shortDescription: 'Affordable & elegant banquet in Moradabad',
+    image: 'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=400&h=300&fit=crop',
+    gallery: [
+      'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1511556532299-8f662fc26c06?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&h=600&fit=crop'
+    ],
+    location: 'Moradabad',
+    rating: 4.5,
+    reviews: 120,
+    priceRange: { min: 100000, max: 300000, unit: 'per day' },
+    availability: ['2026-04-15', '2026-04-20', '2026-05-01', '2026-05-10', '2026-05-15'],
+    services: ['Banquet Hall', 'In-house Catering', 'Basic Decor', 'Parking'],
+    featured: true,
+    established: 2015,
+    eventsCompleted: 300,
+    contact: { phone: '+91 98765 11111', email: 'info@moradabadgrand.com' }
+  },
+  {
+    id: 'budget-caterer-moradabad',
+    slug: 'budget-caterer-moradabad',
+    name: 'Brass City Caterers',
+    category: 'caterers',
+    description: 'Authentic local cuisine with great taste and highly affordable pricing in Moradabad.',
+    shortDescription: 'Authentic & affordable local cuisine',
+    image: 'https://images.unsplash.com/photo-1555244162-803834f70033?w=400&h=300&fit=crop',
+    gallery: [
+      'https://images.unsplash.com/photo-1555244162-803834f70033?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1511556532299-8f662fc26c06?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&h=600&fit=crop'
+    ],
+    location: 'Moradabad',
+    rating: 4.6,
+    reviews: 85,
+    priceRange: { min: 300, max: 800, unit: 'per plate' },
+    availability: ['2026-04-15', '2026-04-20', '2026-05-01', '2026-05-10', '2026-05-15'],
+    services: ['Vegetarian', 'Local Delicacies', 'Dessert Counter'],
+    featured: true,
+    established: 2018,
+    eventsCompleted: 150,
+    contact: { phone: '+91 98765 22222', email: 'brasscitycaterers@gmail.com' }
+  },
+
   // CATERERS
   {
     id: 'royal-caterers-delhi',
@@ -9,6 +64,14 @@ const baseServices = [
     description: 'Premium North Indian cuisine specialists with over 20 years of experience in grand wedding celebrations. Known for authentic flavors and impeccable presentation.',
     shortDescription: 'Premium North Indian cuisine for grand celebrations',
     image: 'https://images.unsplash.com/photo-1555244162-803834f70033?w=400&h=300&fit=crop',
+    gallery: [
+      'https://images.unsplash.com/photo-1555244162-803834f70033?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1511556532299-8f662fc26c06?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1522778147829-047360bdc7f6?w=800&h=600&fit=crop'
+    ],
     location: 'Delhi',
     rating: 4.8,
     reviews: 156,
@@ -28,6 +91,14 @@ const baseServices = [
     description: 'Specializing in Gujarati and Maharashtrian cuisines with a modern twist. Perfect for traditional yet contemporary wedding feasts.',
     shortDescription: 'Gujarati & Maharashtrian cuisine specialists',
     image: 'https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=400&h=300&fit=crop',
+    gallery: [
+      'https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1511556532299-8f662fc26c06?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1522778147829-047360bdc7f6?w=800&h=600&fit=crop'
+    ],
     location: 'Mumbai',
     rating: 4.6,
     reviews: 98,
@@ -47,6 +118,14 @@ const baseServices = [
     description: 'South Indian culinary experts offering authentic Kerala, Tamil, and Karnataka cuisines. Famous for our traditional banana leaf service.',
     shortDescription: 'Authentic South Indian wedding specialists',
     image: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=300&fit=crop',
+    gallery: [
+      'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1511556532299-8f662fc26c06?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1522778147829-047360bdc7f6?w=800&h=600&fit=crop'
+    ],
     location: 'Bangalore',
     rating: 4.7,
     reviews: 142,
@@ -68,6 +147,14 @@ const baseServices = [
     description: 'Transform your venue into a magical wonderland. Specializing in floral arrangements, lighting design, and thematic decorations for Indian weddings.',
     shortDescription: 'Magical venue transformations & floral designs',
     image: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=400&h=300&fit=crop',
+    gallery: [
+      'https://images.unsplash.com/photo-1519741497674-611481863552?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1511556532299-8f662fc26c06?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1522778147829-047360bdc7f6?w=800&h=600&fit=crop'
+    ],
     location: 'Delhi',
     rating: 4.9,
     reviews: 203,
@@ -87,6 +174,14 @@ const baseServices = [
     description: 'Rajasthani-inspired decorations with a royal touch. Expert in palace wedding setups, traditional mandaps, and heritage venue styling.',
     shortDescription: 'Royal Rajasthani wedding decorations',
     image: 'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=400&h=300&fit=crop',
+    gallery: [
+      'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1511556532299-8f662fc26c06?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1522778147829-047360bdc7f6?w=800&h=600&fit=crop'
+    ],
     location: 'Jaipur',
     rating: 4.7,
     reviews: 167,
@@ -106,6 +201,14 @@ const baseServices = [
     description: 'Contemporary and minimalist wedding decorations for modern couples. Specialists in destination weddings and beach setups.',
     shortDescription: 'Modern & minimalist wedding aesthetics',
     image: 'https://images.unsplash.com/photo-1478146059778-26028b07395a?w=400&h=300&fit=crop',
+    gallery: [
+      'https://images.unsplash.com/photo-1478146059778-26028b07395a?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1511556532299-8f662fc26c06?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1522778147829-047360bdc7f6?w=800&h=600&fit=crop'
+    ],
     location: 'Mumbai',
     rating: 4.5,
     reviews: 89,
@@ -127,6 +230,14 @@ const baseServices = [
     description: 'High-energy DJ services with state-of-the-art sound systems. Specialists in Bollywood, Punjabi, and EDM mashups for sangeet and reception.',
     shortDescription: 'High-energy DJ with premium sound systems',
     image: 'https://images.unsplash.com/photo-1571266028243-e4733b0f0bb0?w=400&h=300&fit=crop',
+    gallery: [
+      'https://images.unsplash.com/photo-1571266028243-e4733b0f0bb0?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1511556532299-8f662fc26c06?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1522778147829-047360bdc7f6?w=800&h=600&fit=crop'
+    ],
     location: 'Delhi',
     rating: 4.8,
     reviews: 234,
@@ -146,6 +257,14 @@ const baseServices = [
     description: 'Complete entertainment package with DJ, live band, and anchor services. Known for creating unforgettable sangeet nights.',
     shortDescription: 'Complete entertainment with DJ & live band',
     image: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=300&fit=crop',
+    gallery: [
+      'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1511556532299-8f662fc26c06?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1522778147829-047360bdc7f6?w=800&h=600&fit=crop'
+    ],
     location: 'Mumbai',
     rating: 4.6,
     reviews: 178,
@@ -165,6 +284,14 @@ const baseServices = [
     description: 'Professional audio-visual solutions for weddings. Premium JBL sound systems and Martin lighting rigs for concert-quality experiences.',
     shortDescription: 'Premium AV solutions & concert-quality sound',
     image: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=300&fit=crop',
+    gallery: [
+      'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1511556532299-8f662fc26c06?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1522778147829-047360bdc7f6?w=800&h=600&fit=crop'
+    ],
     location: 'Bangalore',
     rating: 4.7,
     reviews: 145,
@@ -186,6 +313,14 @@ const baseServices = [
     description: 'Luxurious 5-star wedding venue with multiple banquet halls, sprawling lawns, and royal suites. Capacity up to 2000 guests.',
     shortDescription: 'Luxurious 5-star venue for grand celebrations',
     image: 'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=400&h=300&fit=crop',
+    gallery: [
+      'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1511556532299-8f662fc26c06?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1522778147829-047360bdc7f6?w=800&h=600&fit=crop'
+    ],
     location: 'Delhi',
     rating: 4.9,
     reviews: 312,
@@ -205,6 +340,14 @@ const baseServices = [
     description: 'Stunning heritage property overlooking Lake Pichola. Perfect for intimate destination weddings with royal Rajasthani hospitality.',
     shortDescription: 'Heritage lakeside destination wedding venue',
     image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=300&fit=crop',
+    gallery: [
+      'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1511556532299-8f662fc26c06?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1522778147829-047360bdc7f6?w=800&h=600&fit=crop'
+    ],
     location: 'Udaipur',
     rating: 4.8,
     reviews: 187,
@@ -224,6 +367,14 @@ const baseServices = [
     description: 'Dreamy beach wedding venue with private beach access, ocean-view rooms, and sunset ceremony spots. Intimate gatherings up to 300 guests.',
     shortDescription: 'Dreamy beachfront destination weddings',
     image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&h=300&fit=crop',
+    gallery: [
+      'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1511556532299-8f662fc26c06?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1522778147829-047360bdc7f6?w=800&h=600&fit=crop'
+    ],
     location: 'Goa',
     rating: 4.6,
     reviews: 143,
@@ -243,6 +394,14 @@ const baseServices = [
     description: 'Iconic heritage hotel with breathtaking views of the Arabian Sea and Gateway of India. Featuring opulent halls and world-class service.',
     shortDescription: 'Iconic heritage hotel with Arabian Sea views',
     image: 'https://images.unsplash.com/photo-1549488344-c78278f9f0ae?w=400&h=300&fit=crop',
+    gallery: [
+      'https://images.unsplash.com/photo-1549488344-c78278f9f0ae?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1511556532299-8f662fc26c06?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1522778147829-047360bdc7f6?w=800&h=600&fit=crop'
+    ],
     location: 'Mumbai',
     rating: 4.9,
     reviews: 534,
@@ -262,6 +421,14 @@ const baseServices = [
     description: 'A genuine maharajal palace turned luxury hotel. Experience an authentic royal Rajasthani wedding amidst magnificent gardens.',
     shortDescription: 'Authentic royal palace for regal weddings',
     image: 'https://images.unsplash.com/photo-1585828068970-1b75b9de1f4c?w=400&h=300&fit=crop',
+    gallery: [
+      'https://images.unsplash.com/photo-1585828068970-1b75b9de1f4c?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1511556532299-8f662fc26c06?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1522778147829-047360bdc7f6?w=800&h=600&fit=crop'
+    ],
     location: 'Jaipur',
     rating: 4.8,
     reviews: 320,
@@ -281,6 +448,14 @@ const baseServices = [
     description: 'Eco-responsible luxury hotel featuring nature-inspired architecture. Offers a grand ballroom and a rooftop terrace with city views.',
     shortDescription: 'Eco-luxury hotel with nature-inspired design',
     image: 'https://images.unsplash.com/photo-1445019980597-93fa8acb246c?w=400&h=300&fit=crop',
+    gallery: [
+      'https://images.unsplash.com/photo-1445019980597-93fa8acb246c?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1511556532299-8f662fc26c06?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1522778147829-047360bdc7f6?w=800&h=600&fit=crop'
+    ],
     location: 'Bangalore',
     rating: 4.7,
     reviews: 215,
@@ -300,6 +475,14 @@ const baseServices = [
     description: 'An architectural marvel combining Rajputana heritage with modern amenities. Offers stunning desert views and open-air courtyards.',
     shortDescription: 'Rajputana heritage fort with desert views',
     image: 'https://images.unsplash.com/photo-1522778147829-047360bdc7f6?w=400&h=300&fit=crop',
+    gallery: [
+      'https://images.unsplash.com/photo-1522778147829-047360bdc7f6?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1511556532299-8f662fc26c06?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1522778147829-047360bdc7f6?w=800&h=600&fit=crop'
+    ],
     location: 'Jaisalmer',
     rating: 4.6,
     reviews: 178,
@@ -319,6 +502,14 @@ const baseServices = [
     description: 'Chennai’s only seafront city hotel, built in the grandiose style of the Chettinad dynasty. Majestic ballrooms for lavish celebrations.',
     shortDescription: 'Seafront luxury hotel in Chettinad style',
     image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=400&h=300&fit=crop',
+    gallery: [
+      'https://images.unsplash.com/photo-1497366216548-37526070297c?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1511556532299-8f662fc26c06?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1522778147829-047360bdc7f6?w=800&h=600&fit=crop'
+    ],
     location: 'Chennai',
     rating: 4.8,
     reviews: 260,
@@ -338,6 +529,14 @@ const baseServices = [
     description: 'A boutique modern hotel characterized by tranquil waters, rooftop pools, and incredible Mewar architecture for intimate weddings.',
     shortDescription: 'Boutique heritage hotel with rooftop pools',
     image: 'https://images.unsplash.com/photo-1560662105-57f8ad6ae2d1?w=400&h=300&fit=crop',
+    gallery: [
+      'https://images.unsplash.com/photo-1560662105-57f8ad6ae2d1?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1511556532299-8f662fc26c06?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1522778147829-047360bdc7f6?w=800&h=600&fit=crop'
+    ],
     location: 'Udaipur',
     rating: 4.5,
     reviews: 142,
@@ -357,6 +556,14 @@ const baseServices = [
     description: 'Situated on the edge of Miramar Beach, this resort offers spectacular sunset views and a variety of indoor and outdoor venues.',
     shortDescription: 'Beachside resort offering spectacular sunsets',
     image: 'https://images.unsplash.com/photo-1605808381189-ae0491fb3ecf?w=400&h=300&fit=crop',
+    gallery: [
+      'https://images.unsplash.com/photo-1605808381189-ae0491fb3ecf?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1511556532299-8f662fc26c06?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1522778147829-047360bdc7f6?w=800&h=600&fit=crop'
+    ],
     location: 'Goa',
     rating: 4.7,
     reviews: 380,
@@ -378,6 +585,14 @@ const baseServices = [
     description: 'Award-winning wedding photography team capturing candid moments and cinematic films. Specialists in pre-wedding shoots and drone coverage.',
     shortDescription: 'Award-winning candid & cinematic photography',
     image: 'https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=400&h=300&fit=crop',
+    gallery: [
+      'https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1511556532299-8f662fc26c06?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1522778147829-047360bdc7f6?w=800&h=600&fit=crop'
+    ],
     location: 'Delhi',
     rating: 4.9,
     reviews: 289,
@@ -397,6 +612,14 @@ const baseServices = [
     description: 'Boutique photography studio known for artistic compositions and storytelling. Each wedding is treated as a unique visual narrative.',
     shortDescription: 'Artistic storytelling & boutique photography',
     image: 'https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=400&h=300&fit=crop',
+    gallery: [
+      'https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1511556532299-8f662fc26c06?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1522778147829-047360bdc7f6?w=800&h=600&fit=crop'
+    ],
     location: 'Mumbai',
     rating: 4.7,
     reviews: 156,
@@ -416,6 +639,14 @@ const baseServices = [
     description: 'Tech-savvy photography team with latest equipment including RED cameras and Hasselblad. Pioneers in 360° coverage and VR wedding experiences.',
     shortDescription: 'Tech-forward photography with 360° coverage',
     image: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=400&h=300&fit=crop',
+    gallery: [
+      'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1511556532299-8f662fc26c06?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1522778147829-047360bdc7f6?w=800&h=600&fit=crop'
+    ],
     location: 'Bangalore',
     rating: 4.8,
     reviews: 198,
@@ -437,6 +668,14 @@ const baseServices = [
     description: 'Master mehndi artists creating intricate bridal designs. Specialists in Rajasthani, Arabic, and fusion patterns with organic henna.',
     shortDescription: 'Intricate bridal mehndi by master artists',
     image: 'https://images.unsplash.com/photo-1595907934615-a4d03f3e4c77?w=400&h=300&fit=crop',
+    gallery: [
+      'https://images.unsplash.com/photo-1595907934615-a4d03f3e4c77?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1511556532299-8f662fc26c06?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1522778147829-047360bdc7f6?w=800&h=600&fit=crop'
+    ],
     location: 'Delhi',
     rating: 4.9,
     reviews: 267,
@@ -456,6 +695,14 @@ const baseServices = [
     description: 'Traditional Rajasthani mehndi artistry passed through generations. Known for bold designs and dark, long-lasting color.',
     shortDescription: 'Traditional Rajasthani mehndi artistry',
     image: 'https://images.unsplash.com/photo-1591122947157-26bad3a117d2?w=400&h=300&fit=crop',
+    gallery: [
+      'https://images.unsplash.com/photo-1591122947157-26bad3a117d2?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1511556532299-8f662fc26c06?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1522778147829-047360bdc7f6?w=800&h=600&fit=crop'
+    ],
     location: 'Jaipur',
     rating: 4.7,
     reviews: 189,
@@ -477,6 +724,14 @@ const baseServices = [
     description: 'Celebrity makeup artist offering bridal makeovers. Experts in HD makeup, airbrush techniques, and South Indian bridal looks.',
     shortDescription: 'Celebrity makeup artist for bridal makeovers',
     image: 'https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=400&h=300&fit=crop',
+    gallery: [
+      'https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1511556532299-8f662fc26c06?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1522778147829-047360bdc7f6?w=800&h=600&fit=crop'
+    ],
     location: 'Mumbai',
     rating: 4.8,
     reviews: 234,
@@ -496,6 +751,14 @@ const baseServices = [
     description: 'Team of trained makeup artists offering affordable bridal packages. Perfect for brides and their entire wedding party.',
     shortDescription: 'Affordable bridal packages for entire party',
     image: 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=400&h=300&fit=crop',
+    gallery: [
+      'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1511556532299-8f662fc26c06?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1522778147829-047360bdc7f6?w=800&h=600&fit=crop'
+    ],
     location: 'Delhi',
     rating: 4.5,
     reviews: 156,
@@ -517,6 +780,14 @@ const baseServices = [
     description: 'Experienced pandits conducting authentic Hindu wedding ceremonies. Specialists in North Indian, South Indian, and Bengali rituals.',
     shortDescription: 'Authentic Hindu wedding ceremonies',
     image: 'https://images.unsplash.com/photo-1583089892943-e02e5b017b6a?w=400&h=300&fit=crop',
+    gallery: [
+      'https://images.unsplash.com/photo-1583089892943-e02e5b017b6a?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1511556532299-8f662fc26c06?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1522778147829-047360bdc7f6?w=800&h=600&fit=crop'
+    ],
     location: 'Delhi',
     rating: 4.9,
     reviews: 178,
@@ -538,6 +809,14 @@ const baseServices = [
     description: 'Designer wedding invitations with custom illustrations, letterpress printing, and luxury packaging. Digital invites also available.',
     shortDescription: 'Designer invitations with luxury packaging',
     image: 'https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=400&h=300&fit=crop',
+    gallery: [
+      'https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1511556532299-8f662fc26c06?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1522778147829-047360bdc7f6?w=800&h=600&fit=crop'
+    ],
     location: 'Delhi',
     rating: 4.7,
     reviews: 145,
@@ -569,6 +848,14 @@ const generatedCategoryConfig = {
     description: 'Wedding catering team with regional menus, live counters, and trained banquet staff.',
     shortDescription: 'Regional menus with live counters and banquet staff',
     image: 'https://images.unsplash.com/photo-1555244162-803834f70033?w=400&h=300&fit=crop',
+    gallery: [
+      'https://images.unsplash.com/photo-1555244162-803834f70033?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1511556532299-8f662fc26c06?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1522778147829-047360bdc7f6?w=800&h=600&fit=crop'
+    ],
     priceRange: { min: 650, max: 1700, unit: 'per plate' },
     priceStepMin: 35,
     priceStepMax: 50,
@@ -585,6 +872,14 @@ const generatedCategoryConfig = {
     description: 'Full-service decor company focused on floral styling, stage concepts, and wedding ambiance design.',
     shortDescription: 'Floral styling, stage concepts, and theme decor',
     image: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=400&h=300&fit=crop',
+    gallery: [
+      'https://images.unsplash.com/photo-1519741497674-611481863552?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1511556532299-8f662fc26c06?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1522778147829-047360bdc7f6?w=800&h=600&fit=crop'
+    ],
     priceRange: { min: 120000, max: 700000, unit: 'per event' },
     priceStepMin: 12000,
     priceStepMax: 30000,
@@ -601,6 +896,14 @@ const generatedCategoryConfig = {
     description: 'Wedding entertainment crew with DJs, lighting engineers, and dance-floor production support.',
     shortDescription: 'Wedding DJs with sound, lights, and production support',
     image: 'https://images.unsplash.com/photo-1571266028243-e4733b0f0bb0?w=400&h=300&fit=crop',
+    gallery: [
+      'https://images.unsplash.com/photo-1571266028243-e4733b0f0bb0?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1511556532299-8f662fc26c06?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1522778147829-047360bdc7f6?w=800&h=600&fit=crop'
+    ],
     priceRange: { min: 45000, max: 190000, unit: 'per event' },
     priceStepMin: 6000,
     priceStepMax: 12000,
@@ -617,6 +920,14 @@ const generatedCategoryConfig = {
     description: 'Premium wedding venue network offering indoor and outdoor celebration spaces for all scales.',
     shortDescription: 'Premium venue spaces for intimate and grand weddings',
     image: 'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=400&h=300&fit=crop',
+    gallery: [
+      'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1511556532299-8f662fc26c06?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1522778147829-047360bdc7f6?w=800&h=600&fit=crop'
+    ],
     priceRange: { min: 600000, max: 2600000, unit: 'per day' },
     priceStepMin: 50000,
     priceStepMax: 120000,
@@ -633,6 +944,14 @@ const generatedCategoryConfig = {
     description: 'Wedding photography and film team covering candid moments, portraits, and full-event storytelling.',
     shortDescription: 'Candid photography and cinematic wedding films',
     image: 'https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=400&h=300&fit=crop',
+    gallery: [
+      'https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1511556532299-8f662fc26c06?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1522778147829-047360bdc7f6?w=800&h=600&fit=crop'
+    ],
     priceRange: { min: 90000, max: 380000, unit: 'per event' },
     priceStepMin: 8000,
     priceStepMax: 18000,
@@ -649,6 +968,14 @@ const generatedCategoryConfig = {
     description: 'Bridal mehndi specialists creating intricate traditional and contemporary henna patterns.',
     shortDescription: 'Intricate bridal mehndi with guest artist teams',
     image: 'https://images.unsplash.com/photo-1595907934615-a4d03f3e4c77?w=400&h=300&fit=crop',
+    gallery: [
+      'https://images.unsplash.com/photo-1595907934615-a4d03f3e4c77?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1511556532299-8f662fc26c06?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1522778147829-047360bdc7f6?w=800&h=600&fit=crop'
+    ],
     priceRange: { min: 9000, max: 42000, unit: 'per bride' },
     priceStepMin: 1000,
     priceStepMax: 2200,
@@ -665,6 +992,14 @@ const generatedCategoryConfig = {
     description: 'Professional bridal beauty team for makeup, hairstyling, draping, and touch-up support.',
     shortDescription: 'Bridal makeup, hairstyling, and draping services',
     image: 'https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=400&h=300&fit=crop',
+    gallery: [
+      'https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1511556532299-8f662fc26c06?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1522778147829-047360bdc7f6?w=800&h=600&fit=crop'
+    ],
     priceRange: { min: 14000, max: 70000, unit: 'per look' },
     priceStepMin: 1500,
     priceStepMax: 3500,
@@ -681,6 +1016,14 @@ const generatedCategoryConfig = {
     description: 'Experienced priests for complete wedding rituals with regional language and custom samagri support.',
     shortDescription: 'Complete wedding rituals with custom samagri support',
     image: 'https://images.unsplash.com/photo-1583089892943-e02e5b017b6a?w=400&h=300&fit=crop',
+    gallery: [
+      'https://images.unsplash.com/photo-1583089892943-e02e5b017b6a?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1511556532299-8f662fc26c06?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1522778147829-047360bdc7f6?w=800&h=600&fit=crop'
+    ],
     priceRange: { min: 18000, max: 65000, unit: 'per ceremony' },
     priceStepMin: 1800,
     priceStepMax: 3200,
@@ -697,6 +1040,14 @@ const generatedCategoryConfig = {
     description: 'Invitation design house crafting premium wedding cards, boxed invites, and digital stationery.',
     shortDescription: 'Premium card design, boxed invites, and digital stationery',
     image: 'https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=400&h=300&fit=crop',
+    gallery: [
+      'https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1511556532299-8f662fc26c06?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1522778147829-047360bdc7f6?w=800&h=600&fit=crop'
+    ],
     priceRange: { min: 45, max: 420, unit: 'per card' },
     priceStepMin: 6,
     priceStepMax: 10,
@@ -710,7 +1061,7 @@ const generatedCategoryConfig = {
   }
 };
 
-const locationCycle = ['Delhi', 'Mumbai', 'Bangalore', 'Jaipur', 'Udaipur', 'Goa', 'Chennai', 'Jaisalmer', 'Lucknow', 'Muradabad'];
+const locationCycle = ['Delhi', 'Mumbai', 'Bangalore', 'Jaipur', 'Udaipur', 'Goa', 'Chennai', 'Jaisalmer', 'Lucknow', 'Moradabad'];
 
 const availabilitySlots = ['2026-06-02', '2026-06-09', '2026-06-16', '2026-06-23', '2026-06-30', '2026-07-07', '2026-07-14', '2026-07-21'];
 
@@ -750,6 +1101,7 @@ const generatedServices = Object.entries(targetCountByCategory).flatMap(([catego
       description: `${config.description} Popular for dependable execution in ${location} and nearby wedding destinations.`,
       shortDescription: config.shortDescription,
       image: config.image,
+      gallery: config.gallery,
       location,
       rating: Number((config.ratingBase + (index % 5) * 0.1).toFixed(1)),
       reviews: config.reviewsBase + sequence * 12,

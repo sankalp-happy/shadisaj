@@ -209,15 +209,31 @@ export default function Budget() {
                     // 30% of venue-catering budget goes to Catering (assume 300 guests)
                     const catererTargetPerPlate = (venueBudget * 0.3) / 300;
 
-                    const suggestedVenues = services
+                    let suggestedVenues = services
                       .filter(s => s.category === 'venues' && s.priceRange.min <= venueTarget)
                       .sort((a, b) => b.rating - a.rating)
                       .slice(0, 3);
                       
-                    const suggestedCaterers = services
+                    let suggestedCaterers = services
                       .filter(s => s.category === 'caterers' && s.priceRange.min <= catererTargetPerPlate)
                       .sort((a, b) => b.rating - a.rating)
                       .slice(0, 3);
+                      
+                    // Fallback: If no venues found within budget, suggest the most affordable options available
+                    if (suggestedVenues.length === 0) {
+                      suggestedVenues = services
+                        .filter(s => s.category === 'venues')
+                        .sort((a, b) => a.priceRange.min - b.priceRange.min)
+                        .slice(0, 3);
+                    }
+                    
+                    // Fallback: If no caterers found within budget, suggest the most affordable options available
+                    if (suggestedCaterers.length === 0) {
+                      suggestedCaterers = services
+                        .filter(s => s.category === 'caterers')
+                        .sort((a, b) => a.priceRange.min - b.priceRange.min)
+                        .slice(0, 3);
+                    }
 
                     return (
                       <>

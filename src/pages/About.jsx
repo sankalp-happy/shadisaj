@@ -70,15 +70,17 @@ export default function About() {
               { icon: Shield, title: 'Trust & Transparency', desc: 'Every supplier is verified. Every transaction is secure. Build your business on a platform you can trust.', color: 'bg-blue-600/10 text-blue-700' },
               { icon: TrendingUp, title: 'Growth Focused', desc: 'We help wedding vendors scale their businesses with access to wholesale prices, bulk deals, and business tools.', color: 'bg-brand-interactive/20 text-brand-interactive' },
               { icon: Users, title: 'Community First', desc: 'Join a thriving community of wedding professionals. Share insights, discover trends, and grow together.', color: 'bg-green-600/10 text-green-700' },
-            ].map(({ icon: IconComponent, title, desc, color }) => (
-              <div key={title} className="bg-background-main rounded-2xl p-8 border-2 border-utility-border/30 hover:border-brand-interactive hover:shadow-xl transition-all duration-300 group">
-                <div className={`w-14 h-14 ${color} rounded-2xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform`}>
+            ].map((item) => {
+              const IconComponent = item.icon;
+              return (
+              <div key={item.title} className="bg-background-main rounded-2xl p-8 border-2 border-utility-border/30 hover:border-brand-interactive hover:shadow-xl transition-all duration-300 group">
+                <div className={`w-14 h-14 ${item.color} rounded-2xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform`}>
                   <IconComponent className="w-7 h-7" />
                 </div>
-                <h3 className="text-xl font-bold text-text-primary mb-3">{title}</h3>
-                <p className="text-text-primary/70 leading-relaxed">{desc}</p>
+                <h3 className="text-xl font-bold text-text-primary mb-3">{item.title}</h3>
+                <p className="text-text-primary/70 leading-relaxed">{item.desc}</p>
               </div>
-            ))}
+            )})}
           </div>
         </div>
       </section>

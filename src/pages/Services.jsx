@@ -23,6 +23,8 @@ export default function Services() {
   // Get filter values from URL
   const activeCategory = searchParams.get('category') || 'all';
   const activeLocation = searchParams.get('location') || 'all';
+  const activeEventType = searchParams.get('eventType') || 'all';
+  const activeGuests = searchParams.get('guests') || 'all';
   const minBudget = searchParams.get('minBudget') ? parseInt(searchParams.get('minBudget')) : null;
   const maxBudget = searchParams.get('maxBudget') ? parseInt(searchParams.get('maxBudget')) : null;
 
@@ -88,6 +90,26 @@ export default function Services() {
     setSearchParams(params);
   };
 
+  const setEventType = (type) => {
+    const params = new URLSearchParams(searchParams);
+    if (type === 'all') {
+      params.delete('eventType');
+    } else {
+      params.set('eventType', type);
+    }
+    setSearchParams(params);
+  };
+
+  const setGuests = (count) => {
+    const params = new URLSearchParams(searchParams);
+    if (count === 'all') {
+      params.delete('guests');
+    } else {
+      params.set('guests', count);
+    }
+    setSearchParams(params);
+  };
+
   const setBudget = (min, max) => {
     const params = new URLSearchParams(searchParams);
     if (min) {
@@ -112,7 +134,7 @@ export default function Services() {
     ? 'All Services' 
     : serviceCategories.find(c => c.id === activeCategory)?.name || 'All Services';
 
-  const hasActiveFilters = activeCategory !== 'all' || activeLocation !== 'all' || minBudget || maxBudget;
+  const hasActiveFilters = activeCategory !== 'all' || activeLocation !== 'all' || activeEventType !== 'all' || activeGuests !== 'all' || minBudget || maxBudget;
 
   return (
     <div className="min-h-screen bg-background-main pb-16 md:pb-0">
@@ -231,6 +253,42 @@ export default function Services() {
                   {locations.map(loc => (
                     <option key={loc} value={loc}>{loc}</option>
                   ))}
+                </select>
+              </div>
+
+              {/* Event Type */}
+              <div>
+                <h3 className="text-xs font-bold text-text-primary/50 uppercase tracking-wider mb-3 flex items-center gap-2">
+                  <Calendar className="w-4 h-4" /> Event Type
+                </h3>
+                <select
+                  value={activeEventType}
+                  onChange={(e) => setEventType(e.target.value)}
+                  className="w-full px-3 py-2.5 rounded-xl text-sm font-medium border-2 border-utility-border/30 bg-background-main text-text-primary focus:outline-none focus:border-brand-interactive transition-colors"
+                >
+                  <option value="all">All Events</option>
+                  <option value="wedding">Wedding</option>
+                  <option value="pre-wedding">Pre-Wedding / Haldi</option>
+                  <option value="reception">Reception</option>
+                  <option value="engagement">Engagement</option>
+                </select>
+              </div>
+
+              {/* Guests */}
+              <div>
+                <h3 className="text-xs font-bold text-text-primary/50 uppercase tracking-wider mb-3 flex items-center gap-2">
+                  <span className="w-4 h-4 inline-flex items-center justify-center">👥</span> No. of Guests
+                </h3>
+                <select
+                  value={activeGuests}
+                  onChange={(e) => setGuests(e.target.value)}
+                  className="w-full px-3 py-2.5 rounded-xl text-sm font-medium border-2 border-utility-border/30 bg-background-main text-text-primary focus:outline-none focus:border-brand-interactive transition-colors"
+                >
+                  <option value="all">Any Guest Count</option>
+                  <option value="under-100">Under 100</option>
+                  <option value="100-300">100 - 300</option>
+                  <option value="300-500">300 - 500</option>
+                  <option value="500+">500+</option>
                 </select>
               </div>
 

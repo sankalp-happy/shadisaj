@@ -42,21 +42,23 @@ export default function Contact() {
               { icon: Phone, title: 'Call Us', lines: ['+91 88777 77361', 'Mon–Sat, 9 AM–7 PM'], href: 'tel:+918877777361', color: 'text-green-700 bg-green-600/10' },
               { icon: Mail, title: 'Email Us', lines: ['support@shadisaj.in', 'We reply within 24 hrs'], href: 'mailto:support@shadisaj.in', color: 'text-brand-interactive bg-brand-interactive/10' },
               { icon: MapPin, title: 'Visit Us', lines: ['123 Wedding Market', 'New Delhi, 110001'], href: null, color: 'text-brand-primary/75 bg-brand-primary/10' },
-            ].map(({ icon: IconComponent, title, lines, href, color }) => (
-              <div key={title} className="bg-background-card rounded-2xl p-8 border-2 border-utility-border/30 hover:border-brand-interactive hover:shadow-xl transition-all duration-300 text-center group">
-                <div className={`w-14 h-14 ${color} rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform`}>
+            ].map((item) => {
+              const IconComponent = item.icon;
+              return (
+              <div key={item.title} className="bg-background-card rounded-2xl p-8 border-2 border-utility-border/30 hover:border-brand-interactive hover:shadow-xl transition-all duration-300 text-center group">
+                <div className={`w-14 h-14 ${item.color} rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform`}>
                   <IconComponent className="w-7 h-7" />
                 </div>
-                <h3 className="text-xl font-bold text-text-primary mb-3">{title}</h3>
-                {lines.map(line => (
-                  href ? (
-                    <a key={line} href={href} className="block text-text-primary/70 hover:text-brand-interactive transition text-sm">{line}</a>
+                <h3 className="text-xl font-bold text-text-primary mb-3">{item.title}</h3>
+                {item.lines.map(line => (
+                  item.href ? (
+                    <a key={line} href={item.href} className="block text-text-primary/70 hover:text-brand-interactive transition text-sm">{line}</a>
                   ) : (
                     <p key={line} className="text-text-primary/70 text-sm">{line}</p>
                   )
                 ))}
               </div>
-            ))}
+            )})}
           </div>
 
           {/* Business Hours */}

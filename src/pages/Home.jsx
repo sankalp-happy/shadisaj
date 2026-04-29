@@ -1,8 +1,9 @@
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   Sparkles, ShoppingBag, Phone, CheckCircle, Package, Shield,
   TrendingUp, ArrowRight, Lightbulb, Music, Armchair,
-  Camera, Flower, Users, Calculator
+  Camera, Flower, Users, Calculator, Search, MapPin, Calendar, User, IndianRupee
 } from 'lucide-react';
 import { blogs } from '../data/blogs';
 
@@ -19,6 +20,31 @@ const categories = [
 
 export default function Home() {
   const featuredBlogs = blogs.slice(0, 2);
+  const navigate = useNavigate();
+
+  const [searchState, setSearchState] = useState({
+    location: 'all',
+    eventType: 'all',
+    guests: 'all',
+    budget: 'all'
+  });
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    const params = new URLSearchParams();
+    if (searchState.location !== 'all') params.set('location', searchState.location);
+    if (searchState.eventType !== 'all') params.set('eventType', searchState.eventType);
+    if (searchState.guests !== 'all') params.set('guests', searchState.guests);
+    
+    if (searchState.budget !== 'all') {
+       if (searchState.budget === 'under-50k') params.set('maxBudget', '50000');
+       else if (searchState.budget === '50k-2l') { params.set('minBudget', '50000'); params.set('maxBudget', '200000'); }
+       else if (searchState.budget === '2l-5l') { params.set('minBudget', '200000'); params.set('maxBudget', '500000'); }
+       else if (searchState.budget === '5l+') params.set('minBudget', '500000');
+    }
+    
+    navigate(`/services?${params.toString()}`);
+  };
 
   return (
     <div className="min-h-screen bg-background-main">
@@ -27,36 +53,99 @@ export default function Home() {
       <section className="relative bg-gradient-to-br from-brand-primary/10 via-background-card to-brand-secondary/10 border-b-2 border-utility-border overflow-hidden">
         <div className="absolute top-0 right-0 w-72 h-72 bg-brand-interactive/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-brand-primary/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
-        <div className="container mx-auto px-4 py-12 md:py-20 lg:py-28 relative z-10">
+        <div className="container mx-auto px-4 py-12 md:py-20 relative z-10">
           <div className="max-w-5xl mx-auto text-center">
             <div className="inline-flex items-center gap-2 bg-brand-interactive/20 text-text-primary px-5 py-2 rounded-full text-sm font-semibold mb-6 border border-utility-border backdrop-blur-sm">
               <Sparkles className="w-4 h-4 text-brand-interactive" />
-              India's #1 B2B Wedding Marketplace
+              India's One-Stop Wedding Business Hub
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-text-primary mb-6 leading-tight">
-              Grow Your Wedding Business with{' '}
-              <span className="text-brand-interactive">Shadisaj</span>
+              All Your Wedding Business Needs, <span className="text-brand-interactive">Under One Roof</span>
             </h1>
             <p className="text-lg md:text-xl text-text-primary/80 mb-10 leading-relaxed max-w-3xl mx-auto">
-              The trusted marketplace for wedding professionals. Source quality equipment at competitive prices.
-              Connect with verified vendors across India.
+              Browse our curated catalogue, place your order, and we handle the rest — quality-checked and delivered straight to you. Or discover top venues and vendors.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-              <Link
-                to="/vendor/products"
-                className="inline-flex items-center justify-center gap-2 bg-brand-interactive text-white px-8 py-4 rounded-2xl font-semibold hover:bg-alternative-interactiveDark transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1"
-              >
-                Browse Marketplace<ShoppingBag className="w-5 h-5" />
-              </Link>
-              <a
-                href="tel:+918877777361"
-                className="inline-flex items-center justify-center gap-2 bg-background-card text-text-primary px-8 py-4 rounded-2xl font-semibold border-2 border-utility-border hover:border-brand-interactive hover:text-brand-interactive transition-all duration-300 shadow-md"
-              >
-                <Phone className="w-5 h-5" />Talk to Sales
-              </a>
+            
+            {/* ── HERO SEARCH BAR ── */}
+            <div className="bg-background-card p-4 rounded-3xl border-2 border-utility-border/30 shadow-xl mb-12 max-w-4xl mx-auto">
+              <form onSubmit={handleSearch} className="flex flex-col md:flex-row gap-4">
+                <div className="flex-1 relative flex items-center border-b-2 md:border-b-0 md:border-r-2 border-utility-border/30 pb-4 md:pb-0 md:pr-4">
+                  <MapPin className="absolute left-3 w-5 h-5 text-brand-interactive" />
+                  <select 
+                    className="w-full pl-10 pr-4 py-2 bg-transparent text-text-primary focus:outline-none appearance-none font-medium cursor-pointer"
+                    value={searchState.location}
+                    onChange={(e) => setSearchState(prev => ({ ...prev, location: e.target.value }))}
+                  >
+                    <option value="all">All Locations</option>
+                    <option value="Delhi">Delhi</option>
+                    <option value="Mumbai">Mumbai</option>
+                    <option value="Bangalore">Bangalore</option>
+                    <option value="Jaipur">Jaipur</option>
+                    <option value="Udaipur">Udaipur</option>
+                    <option value="Goa">Goa</option>
+                    <option value="Chennai">Chennai</option>
+                    <option value="Jaisalmer">Jaisalmer</option>
+                    <option value="Moradabad">Moradabad</option>
+                  </select>
+                </div>
+                
+                <div className="flex-1 relative flex items-center border-b-2 md:border-b-0 md:border-r-2 border-utility-border/30 pb-4 md:pb-0 md:pr-4">
+                  <Calendar className="absolute left-3 w-5 h-5 text-brand-interactive" />
+                  <select 
+                    className="w-full pl-10 pr-4 py-2 bg-transparent text-text-primary focus:outline-none appearance-none font-medium cursor-pointer"
+                    value={searchState.eventType}
+                    onChange={(e) => setSearchState(prev => ({ ...prev, eventType: e.target.value }))}
+                  >
+                    <option value="all">Event Type</option>
+                    <option value="wedding">Wedding</option>
+                    <option value="pre-wedding">Pre-Wedding / Haldi</option>
+                    <option value="reception">Reception</option>
+                    <option value="engagement">Engagement</option>
+                  </select>
+                </div>
+                
+                <div className="flex-1 relative flex items-center border-b-2 md:border-b-0 md:border-r-2 border-utility-border/30 pb-4 md:pb-0 md:pr-4">
+                  <Users className="absolute left-3 w-5 h-5 text-brand-interactive" />
+                  <select 
+                    className="w-full pl-10 pr-4 py-2 bg-transparent text-text-primary focus:outline-none appearance-none font-medium cursor-pointer"
+                    value={searchState.guests}
+                    onChange={(e) => setSearchState(prev => ({ ...prev, guests: e.target.value }))}
+                  >
+                    <option value="all">No. of Guests</option>
+                    <option value="under-100">Under 100</option>
+                    <option value="100-300">100 - 300</option>
+                    <option value="300-500">300 - 500</option>
+                    <option value="500+">500+</option>
+                  </select>
+                </div>
+                
+                <div className="flex-1 relative flex items-center">
+                  <IndianRupee className="absolute left-3 w-5 h-5 text-brand-interactive" />
+                  <select 
+                    className="w-full pl-10 pr-4 py-2 bg-transparent text-text-primary focus:outline-none appearance-none font-medium cursor-pointer"
+                    value={searchState.budget}
+                    onChange={(e) => setSearchState(prev => ({ ...prev, budget: e.target.value }))}
+                  >
+                    <option value="all">Budget Range</option>
+                    <option value="under-50k">Under ₹50K</option>
+                    <option value="50k-2l">₹50K - ₹2L</option>
+                    <option value="2l-5l">₹2L - ₹5L</option>
+                    <option value="5l+">₹5L+</option>
+                  </select>
+                </div>
+                
+                <button 
+                  type="submit"
+                  className="bg-brand-interactive hover:bg-alternative-interactiveDark text-white px-6 py-3 rounded-xl font-bold transition-all duration-300 shadow-md flex items-center justify-center gap-2 md:w-auto w-full flex-shrink-0"
+                >
+                  <Search className="w-5 h-5" />
+                  <span className="md:hidden lg:inline">Find Services</span>
+                </button>
+              </form>
             </div>
+
             <div className="flex flex-wrap justify-center gap-6 md:gap-10 text-text-primary/60">
-              {['Verified Vendors', 'Secure Payments', 'Pan-India Delivery'].map(t => (
+              {['Curated Catalogue', 'Secure Payments', 'Quality Assured'].map(t => (
                 <div key={t} className="flex items-center gap-2">
                   <CheckCircle className="w-5 h-5 text-green-600" />
                   <span className="text-sm font-medium">{t}</span>
@@ -71,16 +160,16 @@ export default function Home() {
       <section className="py-16 md:py-24">
         <div className="container mx-auto px-4">
           <div className="text-center mb-14">
-            <h2 className="text-3xl md:text-4xl font-bold text-text-primary mb-4">Why Wedding Vendors Choose Shadisaj</h2>
-            <p className="text-text-primary/70 max-w-2xl mx-auto text-lg">Built by industry experts who understand your business needs</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-text-primary mb-4">Why Wedding Professionals Choose Shadisaj</h2>
+            <p className="text-text-primary/70 max-w-2xl mx-auto text-lg">One platform that does the heavy lifting for your business</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto">
             <div className="bg-background-card rounded-2xl p-8 border-2 border-utility-border/30 hover:border-brand-interactive hover:shadow-xl transition-all duration-300 group">
               <div className="w-16 h-16 bg-brand-interactive/20 text-brand-interactive rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                 <Package className="w-8 h-8" />
               </div>
-              <h3 className="text-xl font-bold text-text-primary mb-3">Buy New Equipment</h3>
-              <p className="text-text-primary/70 leading-relaxed mb-4">Access the latest wedding equipment directly from manufacturers. Premium quality with full warranties at wholesale prices.</p>
+              <h3 className="text-xl font-bold text-text-primary mb-3">Curated Catalogue</h3>
+              <p className="text-text-primary/70 leading-relaxed mb-4">Browse thousands of hand-picked wedding products. Order once — we handle sourcing, so you don't have to juggle multiple suppliers.</p>
               <Link to="/vendor/products" className="inline-flex items-center text-brand-interactive font-semibold hover:gap-2 transition-all">
                 Shop Now <ArrowRight className="w-4 h-4 ml-1" />
               </Link>
@@ -89,8 +178,8 @@ export default function Home() {
               <div className="w-16 h-16 bg-green-600/20 text-green-700 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                 <Shield className="w-8 h-8" />
               </div>
-              <h3 className="text-xl font-bold text-text-primary mb-3">Verified Suppliers</h3>
-              <p className="text-text-primary/70 leading-relaxed mb-4">Every supplier on our platform is verified. Shop with confidence knowing you're getting authentic products from trusted sources.</p>
+              <h3 className="text-xl font-bold text-text-primary mb-3">Sourced & Verified</h3>
+              <p className="text-text-primary/70 leading-relaxed mb-4">Every item is quality-checked and authenticated. We vet every source so you receive authentic, quality products every time.</p>
               <Link to="/vendor/products" className="inline-flex items-center text-green-700 font-semibold hover:gap-2 transition-all">
                 Browse Products <ArrowRight className="w-4 h-4 ml-1" />
               </Link>
@@ -99,8 +188,8 @@ export default function Home() {
               <div className="w-16 h-16 bg-brand-primary/20 text-brand-logo rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                 <TrendingUp className="w-8 h-8" />
               </div>
-              <h3 className="text-xl font-bold text-text-primary mb-3">Grow Your Business</h3>
-              <p className="text-text-primary/70 leading-relaxed mb-4">Access bulk discounts, vendor-only deals, and business tools. Scale your wedding business efficiently with smart investments.</p>
+              <h3 className="text-xl font-bold text-text-primary mb-3">Scale With Confidence</h3>
+              <p className="text-text-primary/70 leading-relaxed mb-4">Competitive pricing, business-focused tools, and a reliable supply chain — everything you need to grow your wedding business efficiently.</p>
               <Link to="/about" className="inline-flex items-center text-brand-primary/75 font-semibold hover:gap-2 transition-all">
                 Learn More <ArrowRight className="w-4 h-4 ml-1" />
               </Link>
@@ -138,18 +227,20 @@ export default function Home() {
             <p className="text-text-primary/70 text-lg">Everything you need to run a successful wedding business</p>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 max-w-6xl mx-auto">
-            {categories.map(({ slug, label, bg, icon: IconComponent }) => (
+            {categories.map((cat) => {
+              const IconComponent = cat.icon;
+              return (
               <Link
-                key={slug}
-                to={`/vendor/products?category=${slug}`}
-                className={`${bg} rounded-2xl p-6 text-center transition-all duration-300 cursor-pointer group border-2 hover:shadow-lg hover:-translate-y-1`}
+                key={cat.slug}
+                to={`/vendor/products?category=${cat.slug}`}
+                className={`${cat.bg} rounded-2xl p-6 text-center transition-all duration-300 cursor-pointer group border-2 hover:shadow-lg hover:-translate-y-1`}
               >
                 <div className="w-14 h-14 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-sm group-hover:shadow-md transition-all duration-300">
                   <IconComponent className="w-7 h-7 text-text-primary" />
                 </div>
-                <h3 className="font-semibold text-text-primary">{label}</h3>
+                <h3 className="font-semibold text-text-primary">{cat.label}</h3>
               </Link>
-            ))}
+            )})}
           </div>
           <div className="text-center mt-12">
             <Link
@@ -167,14 +258,14 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="text-center mb-14">
             <h2 className="text-3xl md:text-4xl font-bold text-text-primary mb-4">How It Works</h2>
-            <p className="text-text-primary/70 max-w-2xl mx-auto text-lg">Start buying or selling in minutes</p>
+            <p className="text-text-primary/70 max-w-2xl mx-auto text-lg">Simple, transparent, and built around your workflow</p>
           </div>
           <div className="max-w-5xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
               {[
-                { step: '1', title: 'Create Account', desc: 'Sign up for free as a wedding vendor. Verify your business to unlock all features.' },
-                { step: '2', title: 'Browse & Shop', desc: 'Explore thousands of products. Add to cart and checkout with secure payments.' },
-                { step: '3', title: 'Get Delivered', desc: 'Receive your orders with tracked shipping. Grow your business with quality supplies.' },
+                { step: '1', title: 'Browse & Order', desc: 'Explore our curated catalogue. Pick what you need and check out in minutes with secure payments.' },
+                { step: '2', title: 'We Source It', desc: 'We source directly from certified manufacturers at competitive rates. You get quality without the complexity.' },
+                { step: '3', title: 'Delivered to You', desc: 'Your order arrives with tracked shipping, ready to go. Focus on your clients — we handle the supply chain.' },
               ].map(({ step, title, desc }, i) => (
                 <div key={step} className="relative text-center">
                   <div className="w-16 h-16 bg-brand-interactive text-white rounded-full flex items-center justify-center mx-auto mb-6 text-2xl font-bold shadow-lg">{step}</div>

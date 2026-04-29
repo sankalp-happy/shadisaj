@@ -176,6 +176,22 @@ export default function ServiceDetail() {
               </div>
             </div>
 
+            {/* Gallery Grid */}
+            {service.gallery && service.gallery.length > 0 && (
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-4">
+                {service.gallery.slice(1, 5).map((img, idx) => (
+                  <div key={idx} className="relative rounded-xl overflow-hidden aspect-video group cursor-pointer border border-utility-border/20">
+                    <img 
+                      src={img} 
+                      alt={`${service.name} gallery ${idx + 1}`}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors duration-300" />
+                  </div>
+                ))}
+              </div>
+            )}
+
             {/* Header info */}
             <div className="bg-background-card rounded-2xl border-2 border-utility-border/30 p-6">
               <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
