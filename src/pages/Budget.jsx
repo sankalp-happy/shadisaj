@@ -209,76 +209,63 @@ export default function Budget() {
                     // 30% of venue-catering budget goes to Catering (assume 300 guests)
                     const catererTargetPerPlate = (venueBudget * 0.3) / 300;
 
-                    let suggestedVenues = services
-                      .filter(s => s.category === 'venues' && s.priceRange.min <= venueTarget)
-                      .sort((a, b) => b.rating - a.rating)
-                      .slice(0, 3);
-                      
-                    let suggestedCaterers = services
-                      .filter(s => s.category === 'caterers' && s.priceRange.min <= catererTargetPerPlate)
-                      .sort((a, b) => b.rating - a.rating)
-                      .slice(0, 3);
-                      
-                    // Fallback: If no venues found within budget, suggest the most affordable options available
-                    if (suggestedVenues.length === 0) {
-                      suggestedVenues = services
-                        .filter(s => s.category === 'venues')
-                        .sort((a, b) => a.priceRange.min - b.priceRange.min)
-                        .slice(0, 3);
-                    }
+                    const decoratorTarget = Math.round((percentages['decoration'] / 100) * total);
+                    const photoTarget = Math.round((percentages['photography'] / 100) * total);
+                    const djTarget = Math.round((percentages['dj-music'] / 100) * total);
                     
-                    // Fallback: If no caterers found within budget, suggest the most affordable options available
-                    if (suggestedCaterers.length === 0) {
-                      suggestedCaterers = services
-                        .filter(s => s.category === 'caterers')
-                        .sort((a, b) => a.priceRange.min - b.priceRange.min)
+                    const beautyBudget = Math.round((percentages['attire-beauty'] / 100) * total);
+                    const makeupTarget = beautyBudget * 0.5;
+                    const mehndiTarget = beautyBudget * 0.2;
+
+                    const getSuggestions = (cat, target) => {
+                      let res = services
+                        .filter(s => s.category === cat && s.priceRange.min <= target)
+                        .sort((a, b) => b.rating - a.rating)
                         .slice(0, 3);
-                    }
+                      if (res.length === 0) {
+                        res = services
+                          .filter(s => s.category === cat)
+                          .sort((a, b) => a.priceRange.min - b.priceRange.min)
+                          .slice(0, 3);
+                      }
+                      return res;
+                    };
+
+                    const vendorBlocks = [
+                      { title: 'Matching Venues', icon: '🏛️', data: getSuggestions('venues', venueTarget), emptyMsg: 'No venues found within this budget.' },
+                      { title: 'Matching Caterers', icon: '🍲', data: getSuggestions('caterers', catererTargetPerPlate), emptyMsg: 'No caterers found within this budget.' },
+                      { title: 'Matching Decorators', icon: '🌺', data: getSuggestions('decorators', decoratorTarget), emptyMsg: 'No decorators found within this budget.' },
+                      { title: 'Matching Photographers', icon: '📸', data: getSuggestions('photography', photoTarget), emptyMsg: 'No photographers found within this budget.' },
+                      { title: 'Matching DJs', icon: '🎵', data: getSuggestions('dj', djTarget), emptyMsg: 'No DJs found within this budget.' },
+                      { title: 'Matching Makeup Artists', icon: '💄', data: getSuggestions('makeup', makeupTarget), emptyMsg: 'No makeup artists found within this budget.' },
+                      { title: 'Matching Mehndi Artists', icon: '✋', data: getSuggestions('mehndi', mehndiTarget), emptyMsg: 'No mehndi artists found within this budget.' }
+                    ];
 
                     return (
                       <>
-                        <div className="bg-background-card rounded-2xl border-2 border-utility-border/30 p-6 shadow-sm hover:shadow-md transition-shadow">
-                          <h4 className="font-bold text-lg mb-4 text-text-primary flex items-center gap-2">
-                            <span>🏛️</span> Matching Venues
-                          </h4>
-                          {suggestedVenues.length > 0 ? suggestedVenues.map(venue => (
-                            <div key={venue.id} className="flex gap-4 mb-4 pb-4 border-b border-utility-border/10 last:border-0 last:pb-0 last:mb-0">
-                              <img src={venue.image} className="w-20 h-20 rounded-xl object-cover flex-shrink-0" alt={venue.name} />
-                              <div className="flex-1">
-                                <h5 className="font-bold text-text-primary text-sm line-clamp-1">{venue.name}</h5>
-                                <p className="text-xs text-text-primary/60 mt-0.5">{venue.location} • ₹{formatINR(venue.priceRange.min)} {venue.priceRange.unit}</p>
-                                <Link to={`/services/${venue.slug}`} className="text-xs font-semibold text-brand-interactive hover:text-alternative-interactiveDark mt-2 inline-block">
-                                  View Details &rarr;
-                                </Link>
+                        {vendorBlocks.map((block, idx) => (
+                          <div key={idx} className="bg-background-card rounded-2xl border-2 border-utility-border/30 p-6 shadow-sm hover:shadow-md transition-shadow">
+                            <h4 className="font-bold text-lg mb-4 text-text-primary flex items-center gap-2">
+                              <span>{block.icon}</span> {block.title}
+                            </h4>
+                            {block.data.length > 0 ? block.data.map(vendor => (
+                              <div key={vendor.id} className="flex gap-4 mb-4 pb-4 border-b border-utility-border/10 last:border-0 last:pb-0 last:mb-0">
+                                <img src={vendor.image} className="w-20 h-20 rounded-xl object-cover flex-shrink-0" alt={vendor.name} />
+                                <div className="flex-1">
+                                  <h5 className="font-bold text-text-primary text-sm line-clamp-1">{vendor.name}</h5>
+                                  <p className="text-xs text-text-primary/60 mt-0.5">{vendor.location} • ₹{formatINR(vendor.priceRange.min)} {vendor.priceRange.unit}</p>
+                                  <Link to={`/services/${vendor.slug}`} className="text-xs font-semibold text-brand-interactive hover:text-alternative-interactiveDark mt-2 inline-block">
+                                    View Details &rarr;
+                                  </Link>
+                                </div>
                               </div>
-                            </div>
-                          )) : (
-                            <p className="text-sm text-text-primary/60 bg-background-main p-4 rounded-xl">
-                              No venues found within this budget. Try adjusting the slider or total budget.
-                            </p>
-                          )}
-                        </div>
-                        <div className="bg-background-card rounded-2xl border-2 border-utility-border/30 p-6 shadow-sm hover:shadow-md transition-shadow">
-                          <h4 className="font-bold text-lg mb-4 text-text-primary flex items-center gap-2">
-                            <span>🍲</span> Matching Caterers
-                          </h4>
-                          {suggestedCaterers.length > 0 ? suggestedCaterers.map(caterer => (
-                            <div key={caterer.id} className="flex gap-4 mb-4 pb-4 border-b border-utility-border/10 last:border-0 last:pb-0 last:mb-0">
-                              <img src={caterer.image} className="w-20 h-20 rounded-xl object-cover flex-shrink-0" alt={caterer.name} />
-                              <div className="flex-1">
-                                <h5 className="font-bold text-text-primary text-sm line-clamp-1">{caterer.name}</h5>
-                                <p className="text-xs text-text-primary/60 mt-0.5">{caterer.location} • ₹{caterer.priceRange.min} {caterer.priceRange.unit}</p>
-                                <Link to={`/services/${caterer.slug}`} className="text-xs font-semibold text-brand-interactive hover:text-alternative-interactiveDark mt-2 inline-block">
-                                  View Details &rarr;
-                                </Link>
-                              </div>
-                            </div>
-                          )) : (
-                            <p className="text-sm text-text-primary/60 bg-background-main p-4 rounded-xl">
-                              No caterers found within this budget. Try adjusting the slider or total budget.
-                            </p>
-                          )}
-                        </div>
+                            )) : (
+                              <p className="text-sm text-text-primary/60 bg-background-main p-4 rounded-xl">
+                                {block.emptyMsg} Try adjusting the slider or total budget.
+                              </p>
+                            )}
+                          </div>
+                        ))}
                       </>
                     )
                   })()}
