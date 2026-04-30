@@ -1157,10 +1157,23 @@ const makeupImages = [
   '/images/makeup/m5.jpeg',
   '/images/makeup/m6.jpeg'
 ];
+const djImages = [
+  '/images/dj/dj1.jpg',
+  '/images/dj/dj2.jpg',
+  '/images/dj/dj3.jpg',
+  '/images/dj/dj4.jpg',
+  '/images/dj/dj5.jpg',
+  '/images/dj/dj6.jpg',
+  '/images/dj/dj7.jpg',
+  '/images/dj/dj8.jpg',
+  '/images/dj/dj9.jpg',
+  '/images/dj/dj10.jpg'
+];
 let mehdiIdx = 0;
 let panditIdx = 0;
 let invitationIdx = 0;
 let makeupIdx = 0;
+let djIdx = 0;
 export const services = allServices.map(s => {
   if (s.category === 'mehndi') {
     const newImg = mehdiImages[mehdiIdx % mehdiImages.length];
@@ -1180,6 +1193,11 @@ export const services = allServices.map(s => {
   if (s.category === 'makeup') {
     const newImg = makeupImages[makeupIdx % makeupImages.length];
     makeupIdx++;
+    return { ...s, image: newImg, gallery: [newImg, ...s.gallery.slice(1)] };
+  }
+  if (s.category === 'dj') {
+    const newImg = djImages[djIdx % djImages.length];
+    djIdx++;
     return { ...s, image: newImg, gallery: [newImg, ...s.gallery.slice(1)] };
   }
   return s;
