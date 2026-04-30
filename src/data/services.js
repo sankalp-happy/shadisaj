@@ -1132,11 +1132,26 @@ const mehdiImages = [
   '/images/mehndi/mehendi5.jpg',
   '/images/mehndi/mehendi6.jpg'
 ];
+const panditImages = [
+  '/images/pandit/pandit1.jpeg',
+  '/images/pandit/pandit2.jpeg',
+  '/images/pandit/pandit3.jpg',
+  '/images/pandit/pandit4.jpg',
+  '/images/pandit/pandit5.jpg',
+  '/images/pandit/pandit6.jpg',
+  '/images/pandit/pandit7.jpeg'
+];
 let mehdiIdx = 0;
+let panditIdx = 0;
 export const services = allServices.map(s => {
   if (s.category === 'mehndi') {
     const newImg = mehdiImages[mehdiIdx % mehdiImages.length];
     mehdiIdx++;
+    return { ...s, image: newImg, gallery: [newImg, ...s.gallery.slice(1)] };
+  }
+  if (s.category === 'pandit') {
+    const newImg = panditImages[panditIdx % panditImages.length];
+    panditIdx++;
     return { ...s, image: newImg, gallery: [newImg, ...s.gallery.slice(1)] };
   }
   return s;
