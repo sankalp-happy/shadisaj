@@ -1141,8 +1141,17 @@ const panditImages = [
   '/images/pandit/pandit6.jpg',
   '/images/pandit/pandit7.jpeg'
 ];
+const invitationImages = [
+  '/images/invitations/card1.jpg',
+  '/images/invitations/card2.jpg',
+  '/images/invitations/card3.jpeg',
+  '/images/invitations/card4.jpeg',
+  '/images/invitations/card5.jpeg',
+  '/images/invitations/card6.jpeg'
+];
 let mehdiIdx = 0;
 let panditIdx = 0;
+let invitationIdx = 0;
 export const services = allServices.map(s => {
   if (s.category === 'mehndi') {
     const newImg = mehdiImages[mehdiIdx % mehdiImages.length];
@@ -1152,6 +1161,11 @@ export const services = allServices.map(s => {
   if (s.category === 'pandit') {
     const newImg = panditImages[panditIdx % panditImages.length];
     panditIdx++;
+    return { ...s, image: newImg, gallery: [newImg, ...s.gallery.slice(1)] };
+  }
+  if (s.category === 'invitations') {
+    const newImg = invitationImages[invitationIdx % invitationImages.length];
+    invitationIdx++;
     return { ...s, image: newImg, gallery: [newImg, ...s.gallery.slice(1)] };
   }
   return s;
