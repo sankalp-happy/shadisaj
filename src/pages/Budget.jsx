@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import { IndianRupee, RotateCcw, TrendingUp } from 'lucide-react';
+import { IndianRupee, RotateCcw, TrendingUp, Users, MapPin } from 'lucide-react';
 import { budgetCategories } from '../data/budgetCategories';
 import { services } from '../data/services';
 import { Link } from 'react-router-dom';
 
+const LOCATIONS = ['Delhi NCR', 'Mumbai', 'Bangalore', 'Jaipur', 'Muradabad', 'Other'];
 const PRESETS = [
   { label: '₹5 Lakh', value: 500000 },
   { label: '₹10 Lakh', value: 1000000 },
@@ -21,12 +22,15 @@ function formatINR(n) {
 
 export default function Budget() {
   const [budget, setBudget] = useState('');
+  const [guests, setGuests] = useState('300');
+  const [location, setLocation] = useState('Delhi NCR');
   const [submitted, setSubmitted] = useState(false);
   const [percentages, setPercentages] = useState(() =>
     Object.fromEntries(budgetCategories.map(c => [c.id, c.percentage]))
   );
 
   const total = parseInt(budget.replace(/,/g, ''), 10) || 0;
+  const numGuests = parseInt(guests, 10) || 300;
   const totalPercent = Object.values(percentages).reduce((a, b) => a + b, 0);
 
   const handleSubmit = (e) => {
@@ -85,7 +89,45 @@ export default function Budget() {
               </div>
 
               <form onSubmit={handleSubmit}>
-                <label className="block text-sm font-semibold text-text-primary mb-2">Or enter a custom amount</label>
+                {/* Guest Count */}
+                <div className="mb-4">
+                  <label className="block text-sm font-semibold text-text-primary mb-2">Number of Guests</label>
+                  <div className="relative">
+                    <span className="absolute left-4 top-1/2 -translate-y-1/2 text-brand-interactive">
+                      <Users className="w-5 h-5" />
+                    </span>
+                    <input
+                      type="number"
+                      min="10"
+                      value={guests}
+                      onChange={e => setGuests(e.target.value)}
+                      className="w-full pl-12 pr-4 py-3 border-2 border-utility-border/50 rounded-xl bg-background-main text-text-primary font-semibold focus:outline-none focus:border-brand-interactive transition-colors"
+                      placeholder="e.g. 300"
+                      required
+                    />
+                  </div>
+                </div>
+
+                {/* Location */}
+                <div className="mb-6">
+                  <label className="block text-sm font-semibold text-text-primary mb-2">Location</label>
+                  <div className="relative">
+                    <span className="absolute left-4 top-1/2 -translate-y-1/2 text-brand-interactive">
+                      <MapPin className="w-5 h-5" />
+                    </span>
+                    <select
+                      value={location}
+                      onChange={e => setLocation(e.target.value)}
+                      className="w-full pl-12 pr-4 py-3 border-2 border-utility-border/50 rounded-xl bg-background-main text-text-primary font-semibold focus:outline-none focus:border-brand-interactive transition-colors appearance-none"
+                    >
+                      {LOCATIONS.map(loc => (
+                        <option key={loc} value={loc}>{loc}</option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+
+                <label className="block text-sm font-semibold text-text-primary mb-2">Total Budget Amount</label>
                 <div className="relative mb-2">
                   <span className="absolute left-4 top-1/2 -translate-y-1/2 text-brand-interactive font-bold text-lg">₹</span>
                   <input
@@ -206,8 +248,8 @@ export default function Budget() {
                     const venueBudget = Math.round((percentages['venue-catering'] / 100) * total);
                     // 70% of venue-catering budget goes to Venue
                     const venueTarget = venueBudget * 0.7;
-                    // 30% of venue-catering budget goes to Catering (assume 300 guests)
-                    const catererTargetPerPlate = (venueBudget * 0.3) / 300;
+                    // 30% of venue-catering budget goes to Catering
+                    const catererTargetPerPlate = (venueBudget * 0.3) / numGuests;
 
                     const decoratorTarget = Math.round((percentages['decoration'] / 100) * total);
                     const photoTarget = Math.round((percentages['photography'] / 100) * total);
@@ -219,7 +261,7 @@ export default function Budget() {
 
                     const getSuggestions = (cat, target) => {
                       let res = services
-                        .filter(s => s.category === cat && s.priceRange.min <= target)
+                        .filter(s => s.category === cat && s.priceRange.min <= target && (location === 'Other' || s.location.includes(location) || s.location.includes('Delhi') && location.includes('Delhi')))
                         .sort((a, b) => b.rating - a.rating)
                         .slice(0, 3);
                       if (res.length === 0) {
