@@ -667,7 +667,7 @@ const baseServices = [
     category: 'mehndi',
     description: 'Master mehndi artists creating intricate bridal designs. Specialists in Rajasthani, Arabic, and fusion patterns with organic henna.',
     shortDescription: 'Intricate bridal mehndi by master artists',
-    image: 'https://images.unsplash.com/photo-1595907934615-a4d03f3e4c77?w=400&h=300&fit=crop',
+    image: '/images/mehndi/mehendi1.jpg',
     gallery: [
       'https://images.unsplash.com/photo-1595907934615-a4d03f3e4c77?w=400&h=300&fit=crop',
       'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&h=600&fit=crop',
@@ -694,7 +694,7 @@ const baseServices = [
     category: 'mehndi',
     description: 'Traditional Rajasthani mehndi artistry passed through generations. Known for bold designs and dark, long-lasting color.',
     shortDescription: 'Traditional Rajasthani mehndi artistry',
-    image: 'https://images.unsplash.com/photo-1591122947157-26bad3a117d2?w=400&h=300&fit=crop',
+    image: '/images/mehndi/mehendi2.jpg',
     gallery: [
       'https://images.unsplash.com/photo-1591122947157-26bad3a117d2?w=400&h=300&fit=crop',
       'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&h=600&fit=crop',
@@ -967,7 +967,7 @@ const generatedCategoryConfig = {
     brand: 'Royal Mehndi Artists',
     description: 'Bridal mehndi specialists creating intricate traditional and contemporary henna patterns.',
     shortDescription: 'Intricate bridal mehndi with guest artist teams',
-    image: 'https://images.unsplash.com/photo-1595907934615-a4d03f3e4c77?w=400&h=300&fit=crop',
+    image: '/images/mehndi/mehendi3.jpg',
     gallery: [
       'https://images.unsplash.com/photo-1595907934615-a4d03f3e4c77?w=400&h=300&fit=crop',
       'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&h=600&fit=crop',
@@ -1123,7 +1123,24 @@ const generatedServices = Object.entries(targetCountByCategory).flatMap(([catego
   });
 });
 
-export const services = [...baseServices, ...generatedServices];
+const allServices = [...baseServices, ...generatedServices];
+const mehdiImages = [
+  '/images/mehndi/mehendi1.jpg',
+  '/images/mehndi/mehendi2.jpg',
+  '/images/mehndi/mehendi3.jpg',
+  '/images/mehndi/mehendi4.jpg',
+  '/images/mehndi/mehendi5.jpg',
+  '/images/mehndi/mehendi6.jpg'
+];
+let mehdiIdx = 0;
+export const services = allServices.map(s => {
+  if (s.category === 'mehndi') {
+    const newImg = mehdiImages[mehdiIdx % mehdiImages.length];
+    mehdiIdx++;
+    return { ...s, image: newImg, gallery: [newImg, ...s.gallery.slice(1)] };
+  }
+  return s;
+});
 
 // Helper functions
 export function getServiceBySlug(slug) {
