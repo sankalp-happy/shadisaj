@@ -1,5 +1,6 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ShoppingCart, ArrowLeft, Trash2, MapPin, Phone, Calendar, IndianRupee, ShoppingBag } from 'lucide-react';
+import { ShoppingCart, ArrowLeft, Trash2, MapPin, Phone, Calendar, IndianRupee, ShoppingBag, CreditCard, Smartphone } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { serviceCategories } from '../data/serviceCategories';
 
@@ -13,6 +14,11 @@ function formatPrice(price) {
 
 export default function Cart() {
   const { items, removeFromCart, clearCart, estimatedTotal } = useCart();
+  const [paymentMethod, setPaymentMethod] = useState('upi');
+
+  const handlePayment = () => {
+    alert(`Processing payment via ${paymentMethod === 'upi' ? 'UPI' : 'Credit/Debit Card'}...`);
+  };
 
   // Empty state
   if (items.length === 0) {
@@ -151,17 +157,55 @@ export default function Cart() {
                   </p>
                 </div>
 
+                {/* Payment Options */}
+                <div className="border-t border-utility-border/20 pt-4 mb-6">
+                  <h3 className="font-semibold text-text-primary mb-3">Select Payment Method</h3>
+                  <div className="space-y-2">
+                    <label className={`flex items-center gap-3 p-3 rounded-xl border-2 cursor-pointer transition-colors ${paymentMethod === 'upi' ? 'border-brand-interactive bg-brand-interactive/5' : 'border-utility-border/30 hover:bg-black/5'}`}>
+                      <input 
+                        type="radio" 
+                        name="payment" 
+                        value="upi" 
+                        checked={paymentMethod === 'upi'}
+                        onChange={(e) => setPaymentMethod(e.target.value)}
+                        className="w-4 h-4 text-brand-interactive focus:ring-brand-interactive"
+                      />
+                      <Smartphone className="w-5 h-5 text-text-primary/70" />
+                      <span className="font-medium text-text-primary">UPI (GPay, PhonePe, Paytm)</span>
+                    </label>
+                    <label className={`flex items-center gap-3 p-3 rounded-xl border-2 cursor-pointer transition-colors ${paymentMethod === 'card' ? 'border-brand-interactive bg-brand-interactive/5' : 'border-utility-border/30 hover:bg-black/5'}`}>
+                      <input 
+                        type="radio" 
+                        name="payment" 
+                        value="card" 
+                        checked={paymentMethod === 'card'}
+                        onChange={(e) => setPaymentMethod(e.target.value)}
+                        className="w-4 h-4 text-brand-interactive focus:ring-brand-interactive"
+                      />
+                      <CreditCard className="w-5 h-5 text-text-primary/70" />
+                      <span className="font-medium text-text-primary">Credit / Debit Card</span>
+                    </label>
+                  </div>
+                </div>
+
                 {/* Actions */}
                 <div className="space-y-3">
-                  <a
-                    href="tel:+918877777361"
+                  <button
+                    onClick={handlePayment}
                     className="w-full flex items-center justify-center gap-2 bg-brand-interactive hover:bg-alternative-interactiveDark text-white py-4 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl"
                   >
+                    {paymentMethod === 'upi' ? <Smartphone className="w-5 h-5" /> : <CreditCard className="w-5 h-5" />}
+                    Proceed to Pay
+                  </button>
+                  <a
+                    href="tel:+918877777361"
+                    className="w-full flex items-center justify-center gap-2 bg-background-main hover:bg-utility-border/10 text-text-primary py-3 rounded-xl font-semibold transition-all duration-300 border-2 border-utility-border/30"
+                  >
                     <Phone className="w-5 h-5" />
-                    Contact to Book
+                    Contact for Assistance
                   </a>
                   <p className="text-center text-xs text-text-primary/60">
-                    Call us to confirm availability and get personalized quotes
+                    Need help with booking? Call us anytime.
                   </p>
                 </div>
 
