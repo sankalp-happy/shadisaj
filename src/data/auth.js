@@ -5,16 +5,16 @@ const USERS_KEY = 'shadisaj_users';
 
 // Dummy credentials for testing
 export const DEMO_CREDENTIALS = {
-  email: 'test@shadisaj.com',
+  email: 'kakriti97@gmail.com',
   password: 'wedding123',
-  name: 'Test User',
+  name: 'Akriti',
   phone: '+91 9876543210'
 };
 
 // Initialize with demo user
 function initializeUsers() {
   const existingUsers = localStorage.getItem(USERS_KEY);
-  if (!existingUsers) {
+  if (!existingUsers || existingUsers.includes('test@shadisaj.com')) {
     const users = [
       {
         id: 'user-demo-001',
@@ -108,7 +108,18 @@ export function logout() {
 export function getCurrentUser() {
   const authData = localStorage.getItem(STORAGE_KEY);
   if (authData) {
-    const user = JSON.parse(authData);
+    let user = JSON.parse(authData);
+    
+    // Auto-migrate old demo user
+    if (user.email === 'test@shadisaj.com') {
+      user = {
+        ...user,
+        email: DEMO_CREDENTIALS.email,
+        name: DEMO_CREDENTIALS.name
+      };
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(user));
+    }
+
     if (user.isLoggedIn) {
       return user;
     }

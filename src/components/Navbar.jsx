@@ -114,6 +114,14 @@ export default function Navbar() {
                         <p className="text-sm text-text-primary/60">{user?.email}</p>
                       </div>
                       <Link 
+                        to="/profile" 
+                        className="flex items-center gap-3 px-4 py-2 hover:bg-background-main transition-colors"
+                        onClick={() => setProfileOpen(false)}
+                      >
+                        <User className="w-4 h-4" />
+                        <span>My Profile</span>
+                      </Link>
+                      <Link 
                         to="/wishlist" 
                         className="flex items-center gap-3 px-4 py-2 hover:bg-background-main transition-colors"
                         onClick={() => setProfileOpen(false)}
@@ -154,7 +162,7 @@ export default function Navbar() {
               </div>
             ) : (
               <Link 
-                to="/login"
+                to="/profile"
                 className="flex items-center gap-2 bg-brand-interactive hover:bg-alternative-interactiveDark text-white px-4 py-2 rounded-xl font-semibold transition-all duration-300"
               >
                 <User className="w-4 h-4" />
@@ -221,7 +229,7 @@ export default function Navbar() {
                 </>
               ) : (
                 <Link 
-                  to="/login" 
+                  to="/profile" 
                   className="flex items-center justify-center gap-2 bg-brand-interactive text-white py-3 rounded-xl font-semibold"
                   onClick={() => setMenuOpen(false)}
                 >
@@ -263,6 +271,9 @@ export default function Navbar() {
               </span>
             )}
             Cart
+          </Link>
+          <Link to="/profile" className={`flex flex-col items-center text-xs transition ${location.pathname === '/profile' ? 'text-brand-interactive' : 'text-gray-500 hover:text-gray-700'}`}>
+            <User className="w-6 h-6 mb-1" />Profile
           </Link>
         </div>
       </nav>

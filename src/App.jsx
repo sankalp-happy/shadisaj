@@ -17,6 +17,7 @@ import Wishlist from './pages/Wishlist'
 import Cart from './pages/Cart'
 import Login from './pages/Login'
 import Register from './pages/Register'
+import Profile from './pages/Profile'
 import PrivacyPolicy from './pages/PrivacyPage'
 import TermsOfService from './pages/TermsPage'
 import NotFound from './pages/NotFound'
@@ -43,6 +44,7 @@ function App() {
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
+                <Route path="/profile" element={<Profile />} />
                 <Route path="/terms/privacy-policy" element={<PrivacyPolicy />} />
                 <Route path="/terms/tos" element={<TermsOfService />} />
                 <Route path="*" element={<NotFound />} />
